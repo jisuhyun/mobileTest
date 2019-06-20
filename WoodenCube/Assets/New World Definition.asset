@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa02a9c2d5ccc4e208c47ba645563e95, type: 3}
+  m_Name: New World Definition
+  m_EditorClassIdentifier: 
+  seed: 0
+  biomes:
+  - {fileID: 11400000, guid: ac129697253ab427eb442f0b4fd27abb, type: 2}
+  - {fileID: 11400000, guid: d041a3e3b44a0434190d17225a5dc721, type: 2}
+  - {fileID: 11400000, guid: 63ce008e73a7c4c84920625729e69484, type: 2}
+  defaultBiome: {fileID: 0}
+  infinite: 1
+  extents: {x: 1024, y: 1024, z: 1024}
+  terrainGenerator: {fileID: 11400000, guid: a2d3013923dbb4f089a8beb74503def8, type: 2}
+  detailGenerators: []
+  skyboxDesktop: 1
+  skyboxMobile: 3
+  skyboxDayCubemap: {fileID: 0}
+  skyboxNightCubemap: {fileID: 0}
+  dayCycleSpeed: 1
+  setTimeAndAzimuth: 0
+  timeOfDay: 0
+  azimuth: 15
+  exposure: 1
+  cloudVoxel: {fileID: 0}
+  cloudCoverage: 110
+  cloudAltitude: 150
+  skyTint: {r: 0.52, g: 0.5, b: 1, a: 1}
+  lightScattering: 1
+  lightIntensityMultiplier: 1
+  emissionAnimationSpeed: 0.5
+  emissionMinIntensity: 0.5
+  emissionMaxIntensity: 1.2
+  damageDuration: 3
+  voxelDamageTextures: []
+  gravity: -9.8
+  collapseOnDestroy: 1
+  collapseAmount: 50
+  consolidateDelay: 5
+  moreVoxels: []
+  items: []
+  tileRuleSets: []

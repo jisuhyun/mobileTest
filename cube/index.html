@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>AlgeoCube</title>
+    <link rel="stylesheet" href="./css/algeoapp.css" />
+    <link rel="stylesheet" href="./css/block_coding.css" />
+    <style>
+			#info {
+				/* background:#777; */
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				width: 100%;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+			}
+
+			#panel {
+				position: absolute;
+				left: 0px;				
+				width: 10%;
+				height: 100%;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				/* display: inline-block; */
+				margin: 1em;
+			}
+
+			a {
+				color: #ff0000;
+			}
+		</style>
+</head>
+
+<body class="algeoAppContainer">
+    <!-- <div class="algeo-loading-bg">
+        <div class="algeo-logo"></div>
+    </div> -->
+    <header id="header-wrapper" class="algeoHeader">
+        <div class="logoPanel">
+            <a href="#!">
+                <div class="algeoapp-logo" alt="algeoapp-logo"></div>
+            </a>
+        </div>
+        <div class="naviPanel">
+            <ul class="header-ul-style header-navi-style">
+                <li>
+                    <a href="http://algeomath.kr/algeomath/doc/make.do">
+                        <div class="header-navi-name header-navi-algeodoc" alt="Go to the algeo-Document"
+                            id="algeo-header-navi-algeodoc">문서</div>
+                    </a>
+                </li>
+                <li class="header-navi-hr"></li>
+                <li>
+                    <a href="http://algeomath.kr/modoom.do">
+                        <div class="header-navi-name header-navi-algeogroup" alt="Go to the algeo-Group"
+                            id="algeo-header-navi-algeogroup">모둠</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="header-ul-style header-account-style">
+                <li>
+                    <a href="http://algeomath.kr/login.do">
+                        <div class="header-account-name header-account-login" alt="login" id="algeo-header-login">로그인
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="header-account-hr"></div>
+                </li>
+                <li>
+                    <a href="http://algeomath.kr/join.do">
+                        <div class="header-account-name header-account-signup" alt="signup" id="algeo-header-signup">
+                            회원가입</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section id="contents-wrapper" class="algeoGraph mAlgeoapp">
+        <section id="contents-container">
+            <nav id="container-navigation" class="container-navigation codePanel">
+                <div id="navigation-header-wrapper" class="codeHeadArea">
+                    <ul id="navigation-header-container" class="HeadCtntMenu">
+                        <!-- <li>
+                            <a id="navigaiton-header-menu-tab" class="navigation-header-tab-style tab-menu" data-tab="MenuArea" data-tooltip="메뉴" data-func="cursor">
+                                <span class="HeadMenuIcon">
+                                    <i class="menuIcon"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="navigation-header-block-tab" class="navigation-header-tab-style tab-block" data-tab="BlockArea" data-tooltip="블록코딩" data-func="cursor">
+                                <span class="HeadMenuIcon">
+                                    <i class="blockIcon"></i>
+                                </span>
+                            </a>
+                        </li> -->
+                    </ul>
+                    <div class="geometryGroup">
+                        <ul>
+                            <li class="geometry-tool-list" id="geometry-edit-group">
+                                <div class="grad">
+                                    <div class="btnOptn basicBtn activeItem" role="button" data-func="cursor"
+                                        alt="cursor" data-title="" data-label=""></div>
+                                </div>
+                                <div class="cursorBtnGroup">
+                                    <ul>
+                                        <li class="active">
+                                            <div class="btnOptn basicBtn" role="button" data-func="cursor" alt="cursor"
+                                                data-title="선택" data-label="대상을 선택하거나 드래그하세요."></div><span
+                                                class="geometry-tool-element-name">선택</span><em>Esc</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn basicBtn" role="button" data-func="slctGroup"
+                                                alt="slctGroup" data-title="그룹선택"
+                                                data-label="다양한 대상을 선택하려면 대상을 클릭하거나 사각형으로 드래그하세요."></div><span
+                                                class="geometry-tool-element-name">그룹선택</span><em>G</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn basicBtn" role="button" data-func="text" alt="text"
+                                                data-title="텍스트" data-label="텍스트를 입력할 위치를 선택하세요."></div><span
+                                                class="geometry-tool-element-name">텍스트</span><em>T</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn basicBtn" role="button" data-func="objectHide"
+                                                alt="objectHide" data-title="대상 숨기기" data-label="대상을 선택하세요."></div><span
+                                                class="geometry-tool-element-name">대상 숨기기</span><em>H</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn basicBtn" role="button" data-func="delete" alt="delete"
+                                                data-title="삭제" data-label="대상을 선택하세요."></div><span
+                                                class="geometry-tool-element-name">삭제</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="geometry-tool-list" id="geometry-point-group">
+                                <div class="grad">
+                                    <div class="btnOptn pointBtn" role="button" data-func="point" alt="point"
+                                        data-title="" data-label=""></div>
+                                </div>
+                                <div class="cursorBtnGroup">
+                                    <ul>
+                                        <li class="active">
+                                            <div class="btnOptn pointBtn" role="button" data-func="point" alt="point"
+                                                data-title="점" data-label="점을 생성할 위치를 선택하세요."></div><span
+                                                class="geometry-tool-element-name">점</span><em>D</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn pointBtn" role="button" data-func="meet" alt="meet"
+                                                data-title="교점" data-label="두 대상을 연속적으로 선택하세요."></div><span
+                                                class="geometry-tool-element-name">교점</span><em>I</em>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="geometry-tool-list" id="geometry-line-group">
+                                <div class="grad">
+                                    <div class="btnOptn lineBtn" role="button" data-func="line" alt="line" data-title=""
+                                        data-label=""></div>
+                                </div>
+                                <div class="cursorBtnGroup">
+                                    <ul>
+                                        <li class="active">
+                                            <div class="btnOptn lineBtn" role="button" data-func="line" alt="line"
+                                                data-title="선분" data-label="두 점을 선택하세요."></div><span
+                                                class="geometry-tool-element-name">선분</span><em>S</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn lineBtn" role="button"
+                                                data-func="segment_with_given_length" alt="segmentWithGivenLength"
+                                                data-title="선분 : 주어진 길이" data-label="한 점을 선택한 후 선분의 길이를 입력하세요."></div>
+                                            <span class="geometry-tool-element-name">주어진 길이의 선분</span>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn lineBtn" role="button" data-func="" alt="" data-title=""
+                                                data-label=""></div><span class="geometry-tool-element-name"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="geometry-tool-list" id="geometry-circle-group">
+                                <div class="grad">
+                                    <div class="btnOptn circleBtn" role="button" data-func="circle" alt="circle"
+                                        data-title="" data-label=""></div>
+                                </div>
+                                <div class="cursorBtnGroup">
+                                    <ul>
+                                        <li class="active">
+                                            <div class="btnOptn circleBtn " role="button" data-func="circle"
+                                                alt="circle" data-title="원 : 중심과 한 점"
+                                                data-label="중심점과 원 위의 한 점을 선택하세요."></div><span
+                                                class="geometry-tool-element-name">원 : 중심과 한 점</span><em>C</em>
+                                        </li>
+                                        <li>
+                                            <div class="btnOptn circleBtn" role="button" data-func="compass"
+                                                alt="compass" data-title="컴퍼스"
+                                                data-label="선분 또는 반지름을 지정하는 두 점을 선택한 후 중심점을 선택하세요."></div>
+                                            <span class="geometry-tool-element-name">컴퍼스</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="geometry-tool-list-option" id="geometry-tool-list-option">
+                                <div class="grad">
+                                    <div class="btnOptn optionBtn" role="button" data-func="option" alt="option"
+                                        data-title="도구설정" data-label="도구설정"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="navigation-contents-wrapper" class="navigation-contents-wrapper codeCtntArea menuCollapse">
+                    <ul id="navigaiton-contents-container">
+                        <!--메뉴 영역-->
+                        <!-- <div class="navigation-contents-tab-style menuPanel" id="MenuArea">
+                            <div class="menuArea">
+                                <ul class="menuItems menuFile">
+                                    <div>
+                                        <span></span>파일 </div>
+                                    <li class="menuBtnOptn unit1 menuNewViewport">
+                                        <span></span>새로 만들기 </li>
+                                    <li class="menuBtnOptn unit2 menuOpenViewport">
+                                        <span></span>열기 <em>Ctrl + O</em></li>
+                                    <li class="menuBtnOptn unit3 menuSaveViewport">
+                                        <span></span>저장 <em>Ctrl + S</em></li>
+                                    <li class="menuBtnOptn unit4 menuSaveAsViewport">
+                                        <span></span>다른 이름으로 저장 <em>Ctrl + Shift + S</em></li>
+                                    <li class="menuBtnOptn unit5 menuCopyViewport">
+                                        <span></span>인쇄 <em>Ctrl + P</em></li>
+                                </ul>
+                                <hr>
+                                <ul class="menuItems menuSet">
+                                    <div>
+                                        <span></span>편집</div>
+                                    <li class="menuBtnOptn unit1">
+                                        <span></span>공유 </li>
+                                    <li class="menuBtnOptn unit2">
+                                        <span></span>설정 </li>
+                                    <li class="menuBtnOptn unit3">
+                                        <span></span>도움말 </li>
+                                    <li class="menuBtnOptn unit4">
+                                        <span></span>프로필 </li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <!--블록코딩 영역-->
+                        <!-- <div class="navigation-contents-tab-style blockPanel" id="BlockArea" ria-expanded="true" aria-controls="collapseOne">
+                            
+                            <div id="algeoblock-head-area">
+                                <div id="blockly_tab" class="algeoblock-tab active">Block</div>
+                                <div id="blockly_code_tab" class="algeoblock-tab">Javascript</div>
+                            </div>
+                            <div id="algeoblock-contents-area">
+                                <div id="blockly_area" class="algeoblock-contents active">
+                                    <div id="blockly_block"></div>
+                                    <div id="blockly_div">
+                                        <div class="blockly_control">
+                                            <div class="blockly_execute_group">
+                                                <div class="blockly_execute_wrap">
+                                                    <div class="modal-header"></div>
+                                                    <div class="blockly_controlArea blockly_control_fixed"
+                                                        data-tooltip="블록코딩 버튼 고정">
+                                                        <div id="blockly_control_fixed"
+                                                            class="blocklyConfBtn blocklyButtonFixed">
+                                                            <i class="blockly_control_fixed_icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockly_controlArea blockly_controlLeft" data-tooltip="단계적 실행">
+                                                        <div id="blockly_stepBystepExecute"
+                                                            class="blocklyConfBtn blocklyStepByStepExecute">
+                                                            <i class="blockly_stepBystepExecuteIcon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockly_controlArea blockly_controlMiddle" data-tooltip="실행/중지">
+                                                        <div id="blockly_stop" class="blocklyConfBtn blocklyStop">
+                                                            <i class="blockly_stopIcon"></i>
+                                                        </div>
+                                                        <div id="blockly_execute" class="blocklyConfBtn blocklyExecute">
+                                                            <i class="blockly_executeIcon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockly_controlArea blockly_controlRight"
+                                                        data-tooltip="자동 단계적 실행/중지">
+                                                        <div id="blockly_stepStop" class="blocklyConfBtn blocklyStepStop">
+                                                            <i class="blockly_stepStopIcon"></i>
+                                                        </div>
+                                                        <div id="blockly_stepExecute" class="blocklyConfBtn blocklyStepExecute">
+                                                            <i class="blockly_stepExecuteIcon"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="blockly_submenu_group">
+                                                <input id="clip_target" type="text" value=""
+                                                    style="position:absolute;top:-9999em; display:none;" />
+                                                <div id="blockly_submenu" class="graphCtrlBtn submenu active"></div>
+                                                <div id="blockly_submenu_wrap" class="blockly_submenu_wrap active">
+                                                    <div id="blockly_submenu_undo" class="graphCtrlBtn blocklyClipboard undo"
+                                                        data-tooltip="되돌리기"></div>
+                                                    <div id="blockly_submenu_redo" class="graphCtrlBtn blocklyClipboard redo"
+                                                        data-tooltip="다시실행"></div>
+                                                    <div id="blockly_submenu_copy" class="graphCtrlBtn blocklyClipboard copy"
+                                                        data-clipboard-action="copy" data-tooltip="클립보드 복사"
+                                                        data-clipboard-target="#clip_target"></div>
+                                                    <div id="blockly_submenu_paste" class="graphCtrlBtn blocklyClipboard paste"
+                                                        data-clipboard-action="paste" data-tooltip="클립보드 붙여넣기"
+                                                        data-clipboard-target="#clip_target"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="blockly_code_area" class="algeoblock-contents"></div>
+                            </div>
+                            <div id="handle"></div>
+                        </div> -->
+                    </ul>
+                </div>
+            </nav>
+            <!-- 도움말 영역 -->
+            <!-- <div class="helpPanel" id="helpArea">
+                <div class="helpGroup">
+                    <div class="helpArea helpTit">
+                        다각형
+                    </div>
+                    <span class="helpArea helpHr">
+                        <i class="helpHrIcon"></i>
+                    </span>
+                    <div class="helpArea helpCtnt">
+                        모든 꼭짓점을 선택하고 처음 꼭짓점을 다시 선택하세요.
+                    </div>
+                    <div class="helpArea helpPin" id="fixedHelpPanel">
+                        <i class="helpPinIcon"></i>
+                    </div>
+                </div>
+            </div> -->
+            <!-- 오른쪽 그래프 영역 -->
+            <article id="container-graph" class="graphPanel">
+                <!-- <canvas id="geoGraph"></canvas> -->
+                <div id="panel">
+                    <input id="mode" type="button" value= "BuildMode"><br><br>
+                    <input id="toOrigin" type="button" value= "원점복귀"><br><br>
+                    <input id="replay" type="button" value= "Replay"><br><br>
+                    <strong>Color Select</strong>
+                    <input id="colorSelector" class="jscolor" value="ab2567" style="width: 142px;">
+                    <br>
+                    <br>
+                    
+                    <strong>Texture</strong><br>
+                    <div id="textures"></div>
+                    <br>
+                    <br>
+                    
+                    <strong>Shape</strong><br>
+                    <div id="shapes">
+                        <img class="shape" src='textures/cube.jpeg' width = "50" height = "50" onclick="selectShape(0);">
+                        <img class="shape" src='textures/torus.png' width = "50" height = "50" onclick="selectShape(1);">
+                        <img class="shape" src='textures/sphere.jpeg' width = "50" height = "50" onclick="selectShape(2);">
+                        <img class="shape" src='textures/cylinder.png' width = "50" height = "50" onclick="selectShape(3);">	
+                        <img class="shape" src='textures/torusknot.jpeg' width = "50" height = "50" onclick="selectShape(4);">
+                    </div>
+                    <br>
+                    <br>
+                    
+                </div>
+                <div class="controlArea undoBtn">
+                    <div class="algeo-undo-button" id="algeo-undo-button" data-tooltip="되돌리기" data-func="undoBtn"></div>
+                </div>
+                <div class="controlArea preferences-top">
+                    <div class="graphCtrlBtn setBtn" id="gridSetBtn" data-tooltip="환경설정"></div>
+                    <div class="graphCtrlBtn plusBtn" data-tooltip="확대" data-func="plusBtn"></div>
+                    <div class="graphCtrlBtn minusBtn" data-tooltip="축소" data-func="minusBtn"></div>
+                    <!-- <div class="graphCtrlBtn snapBtn active" data-tooltip="스냅설정" data-func="snapBtn"></div> -->
+                    <!-- <div class="graphCtrlBtn screencapBtn" data-tooltip="스크린샷" data-func="screencapBtn"></div> -->
+                </div>
+                <!-- <div class="controlArea mNaviCallArea">
+                    <div class="mNaviCallBtn"></div>
+                    <ul class="mNaviCallBtnList">
+                        <li class="li1">
+                            <div class="mNaviMoveName">문서</div>
+                            <div>
+                                <a href="/algeomath/doc/make.do" class="doc"><i class="fas fa-file-alt"></i></a>
+                            </div>
+                        </li>
+                        <li class="li2">
+                            <div class="mNaviMoveName">모둠</div>
+                            <div>
+                                <a href="/modoom.do" class="modoom"><i class="far fa-clone"></i></a>
+                            </div>
+                        </li>
+                        <li class="li3">
+                            <div class="mNaviMoveName">홈으로</div>
+                            <div>
+                                <a href="/main.do" class="home"><i class="homeIcon"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="controlArea preferences-bottom">
+                    <div class="graphCtrlBtn blocklyBtn stepBystepExecuteBtn " id="mBlockly_stepBystepExecute"
+                        data-tooltip="단계적 실행" data-func="stepBystepExecuteBtn"><i class="stepBystepExecuteBtnIcon"></i>
+                    </div>
+                    <div class="graphCtrlBtn blocklyBtn executeBtn " id="mBlockly_execute" data-tooltip="실행"
+                        data-func="executeBtn"><i class="executeBtnIcon"></i></div>
+                    <div class="graphCtrlBtn blocklyBtn stopBtn " id="mBlockly_stop" data-tooltip="중지"
+                        data-func="stopBtn">
+                        <i class="stopBtnIcon"></i></div>
+                    <div class="graphCtrlBtn blocklyBtn stepExecuteBtn " id="mBlockly_stepExecute"
+                        data-tooltip="자동 단계적 실행" data-func="stepExecuteBtn"><i class="stepExecuteBtnIcon"></i></div>
+                    <div class="graphCtrlBtn blocklyBtn stepStopBtn " id="mBlockly_stepStop" data-tooltip="자동 단계적 중지"
+                        data-func="stepStopBtn"><i class="stepStopBtnIcon"></i></div>
+                    <!-- <div class="graphCtrlBtn trailBtn" data-tooltip="모든 자취 끄기" data-func="trailBtn"><i
+                            class="trailBtnIcon"></i></div> -->
+                    <!-- <div class="graphCtrlBtn speechBtn" data-tooltip="음성인식" data-func="speechBtn"></div> -->
+                    <div class="graphCtrlBtn returnBtn" data-tooltip="원점복귀" data-func="returnBtn"></div>
+                </div>
+                <div class="mbDim" style="display: none;">&nbsp;</div>
+            </article>
+        </section>
+    </section>
+    <script> var algeoDevMode = true; </script>
+
+    
+    <script src="js/lib/three.js"></script>
+    <script src="js/lib/jscolor.js"></script>
+    <script src="js/lib/WebGL.js"></script>
+
+    <script src="js/lib/acorn_interpreter.js"></script>
+    <script src="js/lib/blockly_compressed.js"></script>
+    <script src="js/lib/blocks_compressed.js"></script>
+    <script src="js/lib/javascript_compressed.js"></script>
+
+    <script src="js/common.js"></script>    
+
+    <script src="js/block/blockly_helper.js"></script>
+    <script src="js/block/algeoblock_rgbhue.js"></script>
+    <script src="js/block/block_msg_ko.js"></script>
+    <script src="js/block/algeoblock.js"></script>
+    <script src="js/block/algeocube_creation_incategory.js"></script>
+
+    <script src="js/lib/threeExtends/vector3.js"></script>
+
+    <script src="js/EditorControls.js"></script>
+    <script src="js/data/resource.js"></script>
+    <script src="js/data/datas.js"></script>
+    <script src="js/data/doManager.js"></script>       
+
+    <script src="js/sound.js"></script>
+    <script src="js/cube.js"></script>
+
+    <script src="js/event/event.js"></script>
+    <script src="js/ui/ui.js"></script>
+    <script src="js/ui/algeocube_navigation.js"></script>
+
+    <script src="js/block/algeocube_block_javascript_function.js"></script>
+    <script src="js/block/algeocube_blockly_workspace.js"></script>
+    <script src="js/block/algeocube_panel_block_coding.js"></script>
+    <script src="js/block/algeocube_shell_block.api.js"></script>
+    <script src="js/block/algeocube_shell_block.js"></script>
+    <script src="js/block/wait_block.js"></script>
+    <script src="js/algeocube_extension.js"></script>
+    <script src="js/algeocube_shell.js"></script>
+    <script src="js/algeocube_main.js"></script>
+
+</body>
+</html>

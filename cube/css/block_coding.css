@@ -1,0 +1,87 @@
+.container-navigation .navigation-contents-wrapper .blocklyToolboxDiv { background-color : white ! important ; overflow: hidden; color : black; margin-top : 1px; z-index: 1; padding: 4px 2px; box-sizing: border-box; }
+.container-navigation .navigation-contents-wrapper .blocklyTreeIcon { display : none ! important; }
+/* .blocklyTreeRow { margin : 0px; padding : 5px 2px 2px 0px; height : 72px ! important; background-color : white; width : 76px ! important; } */
+.container-navigation .navigation-contents-wrapper .blocklyTreeRow { margin : 0px; padding : 3px 0 2px 0px; height : 47px ! important; background-color : white; width : 50px ! important; }
+.container-navigation .navigation-contents-wrapper .blocklyTreeSelected { background-color : #E0E0E0 !important; }
+.container-navigation .navigation-contents-wrapper .blocklyTreeRow:hover { background-color : #E0E0E0 !important; }
+.container-navigation .navigation-contents-wrapper .blockLabel .blocklyFlyoutLabelText { font-size : 0.9em; }
+.container-navigation .navigation-contents-wrapper .blocklyTreeLabel { font-size : 14px; }
+.container-navigation .navigation-contents-wrapper .blocklyTreeRoot { background-color : white !important; padding: 0; }
+/* 블록코딩 코드 탭 추가 */
+.container-navigation .navigation-contents-wrapper #algeoblock-head-area { display: flex; justify-content: center; align-items: center; width: 100%; height: 30px; cursor: pointer; } 
+.container-navigation .navigation-contents-wrapper #algeoblock-contents-area { margin: 0px; padding: 0px; border: 0px; vertical-align: top; width: 100%; height: calc(100% - 30px); position: relative; } 
+.container-navigation .navigation-contents-wrapper .algeoblock-tab { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border: 1px solid #363636; border-width: 0px 1px 1px 0; box-sizing: border-box; background: linear-gradient(to bottom, #7c7c7c, #5a5a5a); color: #fff; font-size: 14px; } 
+/* .container-navigation .navigation-contents-wrapper .algeoblock-tab.active { background: linear-gradient(to top, #7c7c7c, #5a5a5a); } */
+.container-navigation .navigation-contents-wrapper .algeoblock-tab.active { background: #303030; }
+.container-navigation .navigation-contents-wrapper #blockly_code_tab { border-width: 0 0 1px 1px; border-left: 1px solid #7c7c7c; } 
+.container-navigation .navigation-contents-wrapper #blockly_code_tab.active { border-left: 1px solid #303030; } 
+.container-navigation .navigation-contents-wrapper .algeoblock-contents { margin: 0px; padding: 0px; border: 0px; vertical-align: top; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }  
+.container-navigation .navigation-contents-wrapper .algeoblock-contents.active { display: block; } 
+.container-navigation .navigation-contents-wrapper .contents-tab-block { padding: 0; width: 560px; min-width: 441px; max-width:963px;}
+.container-navigation .navigation-contents-wrapper .blockly_execute_group { position: absolute; bottom: 20px; left: 50%; margin: 0 0 0 -146px; z-index: 1;  } 
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap:hover { border: 1px solid #ccc; background: #fff; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap { display: flex; justify-content: space-around; align-items: center; padding: 20px 15px; border: 1px solid transparent; border-radius: 5px; width: 260px; height: 52px; }
+.container-navigation .navigation-contents-wrapper .blocklyConfBtn { height: 50px; width: 50px; color: #fff; border-radius: 26px; z-index: 1; display: flex; align-items: center; justify-content: center; font: 500 15px 'NanumSquareB'; cursor: pointer; } 
+.container-navigation .navigation-contents-wrapper .blockly_control_fixed { margin: 0 10px 0 0; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap.algeoModal { position: fixed; border: 1px solid #ccc; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap.algeoModal .modal-header { display: flex; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap.algeoModal .blocklyButtonFixed { visibility: visible; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap:hover .blocklyButtonFixed {visibility: visible; }
+.container-navigation .navigation-contents-wrapper .blockly_execute_wrap .modal-header { display: none; }
+.container-navigation .navigation-contents-wrapper .blocklyExecute { border: 1px solid #3ea445; background: #fff; }
+.container-navigation .navigation-contents-wrapper .blocklyExecute:hover { background: #4fb255; }
+.container-navigation .navigation-contents-wrapper .blocklyStop,
+.container-navigation .navigation-contents-wrapper .blocklyStepStop { border: 1px solid #bb222e; background: #db4d4d; }
+.container-navigation .navigation-contents-wrapper .blocklyStepExecute {border: 1px solid #5fcc00; background: #5fcc00; } 
+.container-navigation .navigation-contents-wrapper .blocklyButtonFixed.active { border-color: #eeb400; } 
+.container-navigation .navigation-contents-wrapper .blocklyButtonFixed.active:hover { background: #eeb400; }
+.container-navigation .navigation-contents-wrapper .blocklyButtonFixed { visibility: hidden; width: 36px; height: 36px; border-radius: 4px; border: 1px solid #ccc; }
+.container-navigation .navigation-contents-wrapper .blocklyStepByStepExecute,
+.container-navigation .navigation-contents-wrapper .blocklyStepExecute { border: 1px solid #7b7b7b; background: #fff; } 
+.container-navigation .navigation-contents-wrapper .blocklyButtonFixed { border: 1px solid #ccc; }
+.container-navigation .navigation-contents-wrapper .blocklyStepByStepExecute:hover,
+.container-navigation .navigation-contents-wrapper .blocklyStepExecute:hover,
+.container-navigation .navigation-contents-wrapper .blocklyButtonFixed:hover { background: #7b7b7b; }
+
+.container-navigation .navigation-contents-wrapper .graphCtrlBtn { margin: 0 0 5px 0; }
+.container-navigation .navigation-contents-wrapper .graphCtrlBtn.submenu { margin: 0 0 10px 0; position: relative; z-index: 1; }
+.container-navigation .navigation-contents-wrapper .graphCtrlBtn.submenu.active { border-color: #8eb5cc; box-shadow: 0px 0px 3px rgb(4, 147, 212); }
+.container-navigation .navigation-contents-wrapper .blockly_submenu_group { position: absolute; right: 22px; top: 9px; display: block; z-index: 1; }
+.container-navigation .blockly_submenu_group .blockly_submenu_wrap.active .undo { top: 45px; opacity: 1; }
+.container-navigation .blockly_submenu_group .blockly_submenu_wrap.active .redo { top: 85px; opacity: 1; }
+.container-navigation .blockly_submenu_group .blockly_submenu_wrap.active .copy { top: 125px; opacity: 1; }
+.container-navigation .blockly_submenu_group .blockly_submenu_wrap.active .paste { top: 165px; opacity: 1; }
+.container-navigation .blockly_submenu_group .blocklyClipboard { position: absolute; transition: top 0.3s, opacity 0.3s; opacity: 0; top: 0; }
+.container-navigation .blockly_submenu_group .submenu { background-position: -3px -213px; }
+.container-navigation .blockly_submenu_group .undo { background-position: -245px -171px; }
+.container-navigation .blockly_submenu_group .redo { background-position: -283px -171px; }
+.container-navigation .blockly_submenu_group .copy { background-position: -40px -213px; }
+.container-navigation .blockly_submenu_group .paste { background-position: -77px -213px; }
+
+
+i.blockly_stepBystepExecuteIcon,
+i.blockly_stopIcon, 
+i.blockly_executeIcon,
+i.blockly_stepStopIcon,
+i.blockly_stepExecuteIcon,
+i.blockly_control_fixed_icon { background: url(../textures/algeocube_img/Algeoapp_1024.png);}
+i.blockly_stepBystepExecuteIcon { width: 32px; height: 26px; background-position: -1px -546px; }
+i.blockly_executeIcon { width: 27px; height: 30px; margin: 0 0 0 4px; background-position: -65px -546px; }
+i.blockly_stopIcon,
+i.blockly_stepStopIcon{ width: 23px; height: 23px; background-position: -229px -377px; }
+i.blockly_stepExecuteIcon{  width: 40px; height: 34px; background-position: -149px -543px; }
+i.blockly_control_fixed_icon { width: 24px; height: 24px; background-position: -253px -544px; }
+#blockly_control_fixed.active i.blockly_control_fixed_icon { background-position: -230px -544px; }
+.blocklyStepByStepExecute:hover i.blockly_stepBystepExecuteIcon { background-position: -33px -546px; }
+.blocklyExecute:hover i.blockly_executeIcon{ background-position: -93px -546px; }
+.blocklyStepExecute:hover i.blockly_stepExecuteIcon{ background-position: -190px -543px; }
+.container-navigation .navigation-contents-wrapper .blocklyMainWorkspaceScrollbar { z-index: 0; }
+.container-navigation .navigation-contents-wrapper .blocklyFlyout{ z-index: 1; } 
+.container-navigation .navigation-contents-wrapper .createVariableButton { fill : #c40000; }
+
+#notePicker {
+    background-image: url(../textures/algeocube_img/notes.png);
+    border: 1px solid #ccc;
+    height: 109px;
+    width: 46px;
+  }

@@ -1,0 +1,33 @@
+WoodenCube/.vs/
+WoodenCube/Library/
+WoodenCube/obj/
+WoodenCube/build/
+WoodenCube/Unity.TextMeshPro.Editor.csproj
+WoodenCube/Unity.PackageManagerUI.Editor.csproj
+WoodenCube/Unity.CollabProxy.Editor.csproj
+WoodenCube/Unity.Analytics.DataPrivacy.csproj
+WoodenCube/Assembly-CSharp.csproj
+WoodenCube/Assembly-CSharp-Editor.csproj
+WoodenCube/Unity.Timeline.csproj
+WoodenCube/Unity.Timeline.Editor.csproj
+WoodenCube/Unity.TextMeshPro.csproj
+WoodenCube/New Unity Project.sln
+WoodenCube/New Unity Project.csproj
+WoodenCube/New Unity Project.Editor.csproj
+WoodenCube/Temp/
+WoodenCube/WoodenCube.sln
+WoodenCube/WoodenCube.csproj
+WoodenCube/WoodenCube.Editor.csproj
+CemCraft/Assembly-CSharp.csproj
+CemCraft/Assembly-CSharp-Editor.csproj
+CemCraft/CemCraft.sln
+CemCraft/.vs/
+CemCraft/Library/
+CemCraft/Temp/bin/Debug/UnityScript.dll
+CemCraft/Temp/
+CemCraft/obj/
+Geometry/.vscode/
+CemCraft/
+cube/.vscode/launch.json
+woodenCube_three.js/.vscode/launch.json
+.vscode/

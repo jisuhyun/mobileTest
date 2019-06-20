@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Wooden Block!!</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				/* background:#777; */
+				padding:0;
+				margin:0;
+				font-weight: bold;
+				overflow:hidden;
+			}
+
+			#info {
+				/* background:#777; */
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				width: 100%;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+			}
+
+			#panel {
+				position: absolute;
+				left: 0px;				
+				width: 10%;
+				height: 100%;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				/* display: inline-block; */
+				margin: 1em;
+			}
+
+			a {
+				color: #ff0000;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - voxel painter - webgl<br>
+			<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br><br>
+			<strong>middle click</strong>: panning, <strong>right click</strong>: rotate<br><br>
+			<strong>wheel</strong>: zoom<br><br>
+		</div> -->
+		<div id="panel">
+			<input id="mode" type="button" value= "BuildMode"><br><br>
+			<input id="toOrigin" type="button" value= "원점복귀"><br><br>
+			<input id="replay" type="button" value= "Replay"><br><br>
+			<strong>Color Select</strong>
+			<input id="colorSelector" class="jscolor" value="ab2567" style="width: 142px;">
+			<br>
+			<br>
+			
+			<strong>Texture</strong><br>
+			<div id="textures"></div>
+			<br>
+			<br>
+			
+			<strong>Shape</strong><br>
+			<div id="shapes">
+				<img class="shape" src='textures/cube.jpeg' width = "50" height = "50" onclick="selectShape(0);">
+				<img class="shape" src='textures/torus.png' width = "50" height = "50" onclick="selectShape(1);">
+				<img class="shape" src='textures/sphere.jpeg' width = "50" height = "50" onclick="selectShape(2);">
+				<img class="shape" src='textures/cylinder.png' width = "50" height = "50" onclick="selectShape(3);">	
+				<img class="shape" src='textures/torusknot.jpeg' width = "50" height = "50" onclick="selectShape(4);">
+			</div>
+			<br>
+			<br>
+		</div>
+		<script> var algeoDevMode = false; </script>
+
+		<script src="js/lib/three.js"></script>
+		<script src="js/lib/jscolor.js"></script>
+		<script src="js/lib/WebGL.js"></script>
+		
+		<script src="js/lib/threeExtends/vector3.js"></script>
+
+		<script src="js/EditorControls.js"></script>
+		<script src="js/data/resource.js"></script>
+		<script src="js/data/doManager.js"></script>
+
+		<script src="js/common.js"></script>
+		<script src="js/sound.js"></script>
+		<script src="js/cube.js"></script>
+
+		<script src="js/event/event.js"></script>
+		<script src="js/ui/ui.js"></script>
+		
+	</body>
+</html>
+

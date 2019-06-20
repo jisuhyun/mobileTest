@@ -1,0 +1,858 @@
+@import url(https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css);
+/* @import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400i); */
+ 
+/* Initial setting */
+input[type=checkbox] { display: none; } 
+/* to hide the checkbox itself */
+input[type=checkbox]+label:before { font-family: FontAwesome; display: inline-block; } 
+input[type=checkbox]+label:before { content: "\f096"; } 
+/* unchecked icon */
+input[type=checkbox]+label:before { letter-spacing: 10px; } 
+/* space between checkbox and label */
+input[type=checkbox]:checked+label:before { content: "\f046"; } 
+/* checked icon */
+input[type=checkbox]:checked+label:before { letter-spacing: 5px; } 
+/* allow space for check mark */
+html, body { height: 100%; overflow: hidden; color: #555555; font: 16px 'NanumSquareB'; margin: 0px; padding: 0px; letter-spacing: -0.5px; font-weight: 500; -moz-font-weight: 500; /* Firefox */ -webkit-font-weight: 600; /* Safari and Chrome */ -o-font-weight: 500; /* Opera */ } 
+a { text-decoration: none; color: #666; } 
+
+/* Loading */
+.algeo-loading-bg { width: 100%; height: 100%; background: #fff; position:fixed; z-index: 999; }
+.algeo-logo { position: absolute; left: 50%; top: 50%; margin: -92px 0 0 -131px; width: 262px; height: 184px; display: block; background: url(../textures/algeocube_img/Algeomath_loading.gif); } 
+
+/* Chrome, Safari scrollbar */
+::-webkit-scrollbar { width: 12px; height: 8px; } 
+::-webkit-scrollbar-button:start:decrement
+::-webkit-scrollbar-button:end:increment { display: none; } 
+::-webkit-scrollbar-track { background: #ddd; -webkit-border-radius: 10px; border-radius: 10px; box-shadow: inset 0 0 4px rgba(0, 0, 0, .2); -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .2); } 
+::-webkit-scrollbar-thumb { height: 50px; width: 50px; background: #c5c5c5; -webkit-border-radius: 10px; border-radius: 10px; box-shadow: inset 0 0 4px rgba(0, 0, 0, .2); -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .1); } 
+.algeoprop-table-content::-webkit-scrollbar { width: 11px; height: 11px; } 
+.algeoprop-table-content::-webkit-scrollbar-track { -webkit-border-radius: 0; border-radius: 0; } 
+.algeoprop-table-content::-webkit-scrollbar-thumb { -webkit-border-radius: 0; border-radius: 0; } 
+.pntSlctMenuCtnt::-webkit-scrollbar { width: 8px; background-color: #F5F5F5; } 
+
+/* Menu tooltip */
+[data-tooltip]:hover { position: relative; } 
+.presentation-off:hover:after,
+.graphCtrlBtn[data-tooltip]:hover:after,
+.algeoe-undo-button[data-tooltip]:hover:after,
+.algeoModal .styleBtn[data-tooltip]:hover:after,
+.blockly_controlArea[data-tooltip]:hover:after,
+.frontTooltip[data-tooltip]:hover:after { background-color: #000000; background-color: rgba(0, 0, 0, 0.65); border-radius: 5px; color: #FFFFFF; font-size: 12px; content: attr(data-tooltip); margin-bottom: 10px; top: 120%; left: 0; padding: 5px; position: absolute; width: auto; font-style: normal; white-space: nowrap; z-index: 9999; } 
+.toolIcon.frontTooltip[data-tooltip]:hover:after { bottom: unset; top: 25px; left: 28px; right: unset; } 
+/* 190409 발표용 */
+/* Presentation Icon Tooltip */
+.presentation-off[data-tooltip]:hover:after { top: 50%; left: unset; right: 120%; margin: -12px 0 0 0; } 
+/* Blockly Icon Tooltip */
+.blockly_controlArea[data-tooltip]:hover:after { top: -25px; left: unset; } 
+/* StyleBtn Icon Tooltip */
+.algeoModal .styleBtn[data-tooltip]:hover:after { top: -27px; left: -1px; } 
+/* Geometry Icon Tooltip */
+.navigation-header-tab-style[data-tooltip]:hover:after { top:47px; left: 13px; } 
+.navigation-header-tab-style.header-tab-block[data-tooltip]:hover:after { left: 3px; } 
+.geometryGroup .btnOptn::after { display: block; } 
+/* Graphics settings controller tooltip */
+.graphCtrlBtn[data-tooltip]:hover:after { right:42px; top: 5.5px; left: auto; } 
+
+/* Call image */
+.btnOptn,
+.graphCtrlBtn,
+.panelClose,
+.returnBtn,
+.styleBtn i,
+#navigation-header-wrapper .menuIcon,
+.menuItems>div>span,
+.menuBtnOptn span,
+#header-wrapper .algeoapp-logo,
+#navigation-header-wrapper .HeadMenuIcon .algebraIcon,
+.graphPanel .algeo-undo-button,
+.algeo-option-dlg .algeo-tab-collapse-button,
+.algeo-snap-dlg .algeo-tab-collapse-button,
+.algeo-screencap-dlg .algeo-tab-collapse-button,
+.helpArea.helpPin .helpPinIcon,
+.helpPanel .helpGroup .helpHrIcon,
+.clrSlctMenu .styleSubBtn,
+#navigation-header-wrapper .navigation-header-tab-style.active .algebraIcon,
+#navigation-header-wrapper .navigation-header-tab-style.active .codingIcon,
+#navigation-header-wrapper .navigation-header-tab-style.active .blockIcon,
+#navigation-header-wrapper .navigation-header-tab-style.active .menuIcon,
+#navigation-header-wrapper .HeadMenuIcon .codingIcon,
+#navigation-header-wrapper .HeadMenuIcon .blockIcon,
+#navigation-header-wrapper .HeadLftMenuIcon .collapseIcon,
+#navigation-header-wrapper .HeadRghtMenuIcon .collapseIcon,
+#navigaiton-header-menu-tab::after,
+#navigaiton-header-block-tab::after,
+.navigation-contents-li-style .algebraSubMenu i.algebraSortIcon,
+.navigation-contents-li-style .algebraListArea .algebra-sort-style-button i,
+.algebra .panel-l-op .newingAdd,
+.algebra .panel-r-op .algeo-second-icon:after,
+.algebraSlide .panel-r-op .panelPlay,
+.algebraWrong .onoffIcon,
+.equationEditor-switch,
+.controlArea .mNaviCallBtnList .homeIcon:before,
+.controlArea .trailBtn i.trailBtnIcon,
+.controlArea .stepBystepExecuteBtn i.stepBystepExecuteBtnIcon,
+.controlArea .stopBtn i.stopBtnIcon,
+.controlArea .executeBtn i.executeBtnIcon,
+.controlArea .stepStopBtn i.stepStopBtnIcon,
+.controlArea .stepExecuteBtn i.stepExecuteBtnIcon,
+.algeo-option-dlg .setTabCtnt .algeoapp-navitab-moreSettings i,
+.algeo-option-dlg .setTabCtnt .tabScreenBtn i,
+.algeo-tool-editor .toolAll li dl dd .toolIcon,
+.algeoprop-table-content .table-content .xValueSetting,
+.algeoprop-table-content .table-content .activeButton,
+.algeoprop-table-button .table-button-icon.table-button-add i,
+.algeoprop-table-button .table-button-icon.table-button-remove i,
+.algeoPropSpeech .algeoprop-speech-animation,
+.grad .btnOptn::after,
+.navigation-contents-li-style .algebraSubMenu li:after,
+.algebrafolder .onoffIcon::after,
+.geometryGroup .cursorBtnGroup ul li.active::before,
+.algebraWhite .panel-r-op dl dt.panelIcon::before,
+.algeo-option-dlg .tabCtntTit label::before,
+.algeo-snap-dlg .tabCtntTit label::before,
+.algeo-screencap-dlg .tabCtntTit label::before,
+.dlgFlexScreenCap .modal-content-submit .modalBtn.access:before { background: url(../textures/algeocube_img/Algeoapp_1024.png); } 
+
+/* Container setting */
+.algeoNaviContainer { width: 40px; height: 100%; } 
+#app { position: absolute; top: 0; left: 0; bottom: 0; right: 0; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; -ms-transition: .2s; transition: .2s; z-index: 1; -webkit-transform: translateZ(0); -webkit-transform: translate(0, 0); -moz-transform: translate(0, 0); -o-transform: translate(0, 0); -ms-transform: translate(0, 0); transform: translate(0, 0); overflow: hidden; } 
+
+/* Header setting */
+#header-wrapper { height: 59px; border-bottom: 2px solid #0075aa; align-items: center; display: flex; background: #0493d4; position: relative; z-index: 3} 
+#header-wrapper .menuPanel { text-align: right; width: 100%; color: #fff; font-size: 14px; } 
+#header-wrapper .logoPanel img { position: relative; } 
+#header-wrapper .algeoapp-logo { width: 161px; height: 36px; background-position: -321px -475px; } 
+#header-wrapper .logoPanel { width: 40%; height: 100%; margin-left: 30%; display: flex; align-items: center; justify-content: center; } 
+#header-wrapper .naviPanel { width: 30%; display: flex; justify-content: flex-end; } 
+#header-wrapper .loginPanel { width: 7%; min-width: 130px; } 
+#header-wrapper .header-ul-style { list-style: none; padding: 0; min-width: 100px; max-width: 200px; display: flex; align-items: center; } 
+#header-wrapper .header-ul-style .header-navi-hr { width: 4px; height: 4px; background: #fff; border-radius: 10px; margin: 0 15px; } 
+#header-wrapper .header-ul-style .header-navi-name { color: #fff; font: 600 14px 'NanumSquareB'; letter-spacing: 0.3px; } 
+#header-wrapper .header-ul-style .header-account-name { color: #fff; font: 500 12px 'NanumSquareB'; } 
+#header-wrapper .header-ul-style .header-account-hr { width: 1px; height: 12px; background: #fff; margin: auto 8px; } 
+#header-wrapper .header-account-style { margin: 0 12px 0 40px; } 
+#contents-wrapper { height: calc(100% - 60px); width: auto; position: relative; } 
+.docuPanel { height: 40px; display: flex; justify-content: center; align-items: center; border-bottom: 2px solid #004173; border-top: 2px solid #004173; } 
+.docuPanel span { font-size: 14px; font-weight: 600; } 
+
+/* left side bar setting */
+#contents-container { height: 100%; display: flex; flex-direction: row; }
+#container-navigation { display: flex; box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.32); position: relative; z-index: 2; } 
+.graphPanel { height: 100%; width: 100%; position: relative; overflow: hidden; z-index: 0; } 
+.menuCollapse.inactive { margin-left: -360px; } 
+
+/* Toolbar Header Area */
+#container-navigation #navigation-header-wrapper { height: 100%; width: 57px; background: #5d5d5d; background-size: cover; flex-flow: column; display: flex; position: relative; z-index: 9; } 
+#navigation-header-wrapper .HeadMenuIcon { width: 57px; height: 58px; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; } 
+#navigation-header-wrapper .HeadMenuIcon .menuIcon { width: 19px; height: 14px; background-position: -28px -318px; } 
+#navigation-header-wrapper .HeadMenuIcon .algebraIcon { background-position: -79px -303px; width: 28px; height: 26px; } 
+#navigation-header-wrapper .HeadMenuIcon .codingIcon { background-position: -430px -95px; width: 30px; height: 27px; } 
+#navigation-header-wrapper .HeadMenuIcon .blockIcon { background-position: -136px -303px; width: 25px; height: 30px; } 
+#navigation-header-wrapper .algeo-menutab-disabled .HeadMenuIcon .menuIcon { background-position: -28px -303px; } 
+#navigation-header-wrapper .algeo-menutab-disabled .HeadMenuIcon .algebraIcon { background-position: -49px -303px; } 
+#navigation-header-wrapper .algeo-menutab-disabled .HeadMenuIcon .codingIcon { background-position: -429px -122px; } 
+#navigation-header-wrapper .navigation-header-tab-style.active .menuIcon { background-position: -28px -303px; } 
+#navigation-header-wrapper .navigation-header-tab-style.active .algebraIcon { background-position: -49px -303px; } 
+#navigation-header-wrapper .navigation-header-tab-style.active .codingIcon { background-position: -429px -122px; } 
+#navigation-header-wrapper .navigation-header-tab-style.active .blockIcon { background-position: -109px -303px; } 
+#navigation-header-wrapper .HeadLftMenuIcon .collapseIcon { background-position: -28px -333px; width: 18px; height: 18px; } 
+#navigation-header-wrapper .HeadRghtMenuIcon .collapseIcon { background-position: -28px -333px; transform: rotate(180deg); width: 18px; height: 18px; } 
+#navigation-header-container { display: flex; width: 57px; align-items: center; flex-flow: column; padding: 0; margin: 0; list-style: none; } 
+#navigation-header-container .active { color: #111; background: #fff; width: 100%; } 
+.navigation-header-li-style { width: 100%; }
+#navigation-header-wrapper .header-tab-menu { width:100%; height: 58px; min-height: 35px; display: flex; align-items: center; flex-flow: column; } 
+.navigation-header-tab-style { display: flex; background: linear-gradient(to right, #7c7c7c, #5a5a5a); border-bottom: 1px solid #363636; justify-content: center; align-items: center; cursor: pointer; width: 100%; height: 58px;} 
+.navigation-header-tab-style+.navigation-header-tab-style { border-top: 1px solid #7c7c7c; min-height: 35px; } 
+#navigaiton-header-menu-tab::after { content: ''; width: 19px; height: 14px; background-position: -28px -318px; }
+#navigaiton-header-block-tab::after { content: ''; background-position: -136px -303px; width: 25px; height: 30px; }
+#navigaiton-header-menu-tab.active::after { background-position: -28px -303px; } 
+#navigaiton-header-block-tab.active::after { background-position: -109px -303px; } 
+#navigation-header-wrapper .navigation-header-tab-style.codingTab { display: none; visibility: hidden; } 
+#navigation-header-wrapper .navigation-header-tab-style.algeo-menutab-disabled { opacity: 0.7; cursor: default; } 
+#navigation-contents-wrapper #navigaiton-contents-container { padding: 0;  margin: 0; width: 100%; height: 100%; }
+
+.geometryGroup { width: 57px; margin-top: 5px; } 
+.geometryGroup ul { margin: 0; padding: 0; } 
+.geometryGroup ul li { list-style: none; position: relative; margin: 0; padding: 2px 0 2px 6px; line-height: 0; } 
+.grad { width: 41px; height: 41px; padding: 2px 1px 1px 2px; background: linear-gradient(to top, #858585, #404040); border-radius: 5px; } 
+.grad .btnOptn { position: relative; width: 40px; height: 40px; margin: 0; border: none; } 
+.grad .btnOptn::after { width: 8px; height: 8px; background-position: -335px -356px; content: ''; position: absolute; right: 2px; bottom: 2px; } 
+.grad .btnOptn:hover { width: 40px; height: 40px; border: none; } 
+.geometryGroup ul li:hover { background: #404040; } 
+.geometryGroup ul li:hover .grad { background: #404040; } 
+.geometryGroup ul li:hover .grad .btnOptn::after { background-position: -335px -365px; } 
+.geometryGroup ul li:last-child:hover { background: transparent; }
+.geometryGroup .cursorBtnGroup { display: none; position: absolute; top: 0; left: 57px; width: 260px; padding: 6px 0; background: #404040; } 
+.geometryGroup .cursorBtnGroup ul { margin: 0; padding: 0; } 
+.geometryGroup .cursorBtnGroup ul li { position: relative; list-style: none; cursor: pointer; margin: 0; padding: 4px 0 4px 28px; color: #fff; font-size: 16px; align-items: center; } 
+.geometryGroup .cursorBtnGroup ul li.active { width: auto; background: none; } 
+.geometryGroup .cursorBtnGroup ul li.active::before { background-position: -344px -367px; content: ''; position: absolute; top: 19px; left: 11px; width: 8px; height: 8px; } 
+.geometryGroup .cursorBtnGroup ul li .btnOptn { width: 40px; height: 40px; margin-right: 15px; border: none; vertical-align: middle; } 
+.geometryGroup .cursorBtnGroup ul li .btnOptn:hover { width: 40px; height: 40px; border: none; } 
+.geometryGroup .cursorBtnGroup ul li:hover { background: #707070; } 
+.geometryGroup .cursorBtnGroup ul li em { position: absolute; top: 22px; right: 25px; color: #fff; font-size: 12px; font-weight: bold; } 
+
+/* 기하 옵션 선택 해제 시 비활성화 */
+.geometryGroup .algeo-toolbar-disabled:hover .cursorBtnGroup { display: none; } 
+.geometryGroup .algeo-toolbar-disabled .cursorBtnGroup { visibility: hidden; } 
+.geometryGroup .algeo-toolbar-disabled:hover { background: transparent; } 
+.geometryGroup .algeo-toolbar-disabled .grad { background: #404040; } 
+.geometryGroup .algeo-toolbar-disabled .btnOptn { opacity: 0.3; cursor: default; } 
+.geometryGroup .algeo-toolbar-disabled .btnOptn.activeItem,
+.geometryGroup .algeo-toolbar-disabled .btnOptn.activeItem:hover { border: 3px solid white; } 
+.geometryGroup ul li.algeo-toolbar-disabled:hover .grad .btnOptn::after { background-position: -335px -356px; }
+/*@media all and (max-height: 768px) { .geometryGroup .cursorBtnGroup { top: inherit; bottom: 0; } } */
+
+/* Left Tool Area Details */
+.navigation-contents-wrapper { height: 100%; display: flex; transition: all 0.4s cubic-bezier(0.39, 0.58, 0.57, 1) 0.1s; position: relative; background: #fff; } 
+.navigation-contents-wrapper .navigation-contents-li-style.algebraPanel.active { margin-top: 0; padding: 0; } 
+.navigation-contents-wrapper .navigation-contents-li-style.active { left: 0; width: 360px; height: inherit; display: inline-block; visibility: visible; } 
+.navigation-contents-wrapper .navigation-contents-li-style { position: relative; z-index: 1; left: 100%; display: none; visibility: hidden; } 
+.navigation-contents-li-style .algebraSubMenu { position: fixed; display: table; width: 360px; margin: 0; padding: 0; z-index: 2; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSort { width: 46px; display: table-cell; position: relative; list-style: none; height: 28px; margin: 0; padding: 0; background: linear-gradient(to top, #5c5c5c, #7d7d7d); border-right: 1px solid #292929; border-bottom: 1px solid #292929; color: #fff; font-size: 12px; line-height: 25px; text-align: center; cursor: pointer; z-index: 1; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSort.active { background: #404040; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortOption { position: absolute; right: 0; width: 26px; height: 100%; display: flex; justify-content: center; align-items: center; cursor: pointer; } 
+.navigation-contents-li-style .algebraSubMenu i.algebraSortIcon { background-position: -33px -407px; width: 14px; height: 13px; margin: 0 0 -3px 0; display: inline-block; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortOption.active i.algebraSortIcon { background-position: -47px -407px; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortList { position: relative; list-style: none; height: 30px; width: 100%; margin: 0; padding: 0; background: #404040; display: flex; justify-content: space-evenly; align-items: center; color: #868686; font-size: 13px; font-weight: 600; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortItem { height: 100%; cursor: pointer; position: relative; display: flex; width: 100%; justify-content: center; align-items: center; border-left: 1px solid #292929; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortItem:hover,
+.navigation-contents-li-style .algebraSubMenu .algebraSortItem.active { color: #fff; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortItem.active:after { content: ''; width: 5px; height: 5px; display: block; position: absolute; left: 60px;bottom: 50%; top: 13px; background: #fff; border-radius: 1px; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortOptionCtnt { display: none; width: 100%; height: 90px; position: relative; background: #404040; border: 1px solid #292929; border-width: 1px 0; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortOptionArea { height: 55px; width: calc(100% - 40px); display: flex; flex-flow: wrap; padding: 20px; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortBtn { font: 500 14px 'Libre Baskerville'; font-family: 'Libre Baskerville', 'NanumSquareB'; width: 25%; padding: 0 0 0 25px; flex: auto; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortCbk + label { cursor: pointer; color: #fff; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortCbk + label::before { content: ' '; display: inline-flex; align-items: center; width: 15px; height: 15px; font-size: 10px; margin: 0px 6px 0 0; vertical-align: middle; background: #fff; border-radius: 3px; } 
+.navigation-contents-li-style .algebraSubMenu .algebraSortCbk:checked + label::before { content: '\f14a'; font-size: 18px; color: #0079c2; text-shadow: 0px 1px 0px #0079c2; background: #fff; overflow: hidden; border-radius: 4px; } 
+
+.navigation-contents-li-style .algebraSubMenu .algebraExamList { list-style: none; margin: 0; padding: 0; display: flex; height: 30px; } 
+.navigation-contents-li-style .algebraSubMenu .algebraExampleTab { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; background: linear-gradient(to top, #5c5c5c, #7d7d7d); border-left: 1px solid #5c5c5c; border-bottom: 1px solid #292929; color: #fff; font-size: 12px; cursor: pointer;} 
+.navigation-contents-li-style .algebraSubMenu .algebraExampleTab:after { background-position: -375px -356px; transform: rotate(180deg); content: ''; display: inline-block; position: absolute; top: 11px; right: 10px; width: 13px; height: 6px; cursor: pointer; }
+.navigation-contents-li-style .algebraSubMenu .algebraExampleTab.active { background: #303030; border-left: 1px solid #303030; } 
+.navigation-contents-li-style .algebraSubMenu .algebraExampleTab.active:after { background-position: -375px -356px; transform: rotate(0deg); content: ''; display: inline-block; position: absolute; top: 9px; right: 10px; width: 11px; height: 6px; } 
+.navigation-contents-li-style .algebraExampleCtnt { display: none; width: 360px; height: calc(100vh - 86px); overflow: auto; overflow-x: hidden; position: absolute; top: 30px; left: 0px; background: #fff; border-bottom: 1px solid #848484; z-index: 3; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-area { width: 372px; height: inherit; overflow-y: auto; overflow-x: hidden; } 
+.navigation-contents-li-style .algebraExampleCtnt .algebraExamBg { background: url(../textures/algeocube_img/example.jpg); width: inherit; height: 100%; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-item { height: 92px; width: 100%; background: #303030; cursor: pointer; border-bottom: 1px solid #5f5f5f; display: flex; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; justify-content: center; align-items: center; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-item:hover { opacity: 0.9; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-thumbnail-area { height: 100%; min-width: 92px; display: flex; justify-content: center; align-items: center; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-thumbnail { width: 70px; height: 70px; border: 1px solid white; border-radius: 7px; background-size: 500%; background-position: center; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-title-area { min-width: 264px; height: 100%; display: flex; align-items: center; flex-wrap: wrap; color: #fff; padding: 0 0 0 5px;} 
+.navigation-contents-li-style .algebraExampleCtnt .example-title { width: 100%; font-weight: bold; height: 22px; margin: 22px 0 0 0; letter-spacing: -1.7px; } 
+.navigation-contents-li-style .algebraExampleCtnt .example-subheading { width: 100%; font-size: 14px; margin: 0 0 18px 0; padding: 0 10px 0 0; letter-spacing: -0.8px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; } 
+.example-content { visibility: hidden; bottom: -1px; width: 370px; position: fixed; z-index: 3; left: 445px; background: #454545; border-radius: 5px; padding: 22px 35px 35px; font: 500 14px 'NanumSquareB'; color: #fff; } 
+/* .algebraExampleCtnt .example-content:after { content: ''; position: absolute; border-style: solid; border-width: 14px 17px 14px 0px; border-color: transparent #454545; display: block; width: 0; z-index: 1; left: -17px; top: 32px; }  */
+.example-content .example-content-arrow { position: absolute; border-style: solid; border-width: 14px 17px 14px 0px; border-color: transparent #454545; display: block; width: 0; z-index: 1; left: -17px; top: 32px; } 
+.example-content .example-content-header { padding: 0 0 22px 0; display: flex; justify-content: space-between; align-items: center; } 
+.example-content .content-open-button { width: 125px; height: 30px; background: #0493d4; color:#fff; border-radius: 5px; display: flex; justify-content: center; align-items: center; cursor: pointer; } 
+.example-content .content-open-button:hover { background: #279ed4; } 
+.example-content .content-header { font-weight: 600; font-size: 15px; } 
+.example-content .content-body-thumbnail { height: 260px; border: 1px solid #fff; border-radius: 4px; margin: 0 0 20px 0; background-size: auto; background-position: center; } 
+.example-content .content-body-content { margin: 20px 0 0; line-height: 19px; } 
+
+/* Menu Area */
+.menuItems { list-style: none; padding: 0; margin: 0; } 
+.menuItems div { padding: 17px 27px; display: flex; align-items: center; -moz-font-weight: 500; /* Firefox */ -webkit-font-weight: 600; /* Safari and Chrome */ -o-font-weight: 500; /* Opera */ font-size: 15px; } 
+.menuItems>div>span { background-position: -2px -302px; width: 24px; height: 21px; display: inline-block; margin-right: 15px; } 
+.menuItems>li:hover { background: #0493d4; cursor: pointer; color: #fff; font-weight: 600; } 
+.menuItems .menuBtnOptn { font-size: 15px; position: relative; padding: 7px 46px; display: flex; align-items: center; -moz-font-weight: 500; /* Firefox */ -webkit-font-weight: 600; /* Safari and Chrome */ -o-font-weight: 500; /* Opera */ } 
+.menuItems .menuBtnOptn em { position: absolute; right: 25px; color: #b3b3b3; font-size: 12px; font-weight: bold; font-family: 'NanumSquareB'; } 
+@media screen and (-webkit-min-device-pixel-ratio: 0) { 
+    .menuItems .menuBtnOptn,
+    .menuItems div { font-weight: 600; } 
+} 
+.menuBtnOptn span { width: 26px; height: 26px; display: inline-block; margin-right: 15px; } 
+.menuFile li.unit1 span { background-position: -162px -302px; } 
+.menuFile .unit2 span { background-position: -188px -302px; } 
+.menuFile .unit3 span { background-position: -214px -302px; } 
+.menuFile .unit4 span { background-position: -240px -302px; } 
+.menuFile .unit5 span { background-position: -266px -302px; } 
+.menuFile li.unit1:hover span { background-position: -162px -328px; } 
+.menuFile li.unit2:hover span { background-position: -188px -328px; } 
+.menuFile li.unit3:hover span { background-position: -214px -328px; } 
+.menuFile li.unit4:hover span { background-position: -240px -328px; } 
+.menuFile li.unit5:hover span { background-position: -266px -328px; } 
+.menuSet div span { background-position: -2px -324px; height: 24px; } 
+.menuSet .unit1 span { background-position: -293px -303px; } 
+.menuSet .unit2 span { background-position: -319px -303px; } 
+.menuSet .unit3 span { background-position: -345px -303px; } 
+.menuSet .unit4 span { background-position: -371px -303px; } 
+.menuSet li.unit1:hover span { background-position: -293px -329px; } 
+.menuSet li.unit2:hover span { background-position: -319px -329px; } 
+.menuSet li.unit3:hover span { background-position: -345px -329px; } 
+.menuSet li.unit4:hover span { background-position: -371px -329px; } 
+.contents-tab-menu hr { margin: 23px 25px 15px; border: 0px; border-top: 1px solid #e0e0e0; ; } 
+
+/* Algebraic Area */
+.algebraArea { margin-top: 60px; height: calc(100% - 61px); width: inherit; overflow-y: auto; overflow-x: hidden; } 
+/* .algebraListArea { border-bottom: 1px solid #d5d7d7; }  */
+.algebraArea .algebraListArea .algebra-sort-group-title { width: 100%; height: 30px; position: relative; background-image: linear-gradient(#f7f7f7, #e6e6e6); display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; border-width: 1px 0 0 0; font-weight: 600; } 
+.algebraArea .algebraListArea .algebra-sort-style-button i { display: block; width: 18px; height: 6px; background-position: -14px -432px; } 
+.algebraArea .algebraListArea .algebra-sort-style-button { position: absolute; right: 0; width: 32px; height: 100%; display: flex; justify-content: center; align-items: center; cursor: pointer; } 
+.algebraArea .algebraListArea .algebra-sort-style-menu { width: calc(100% - 42px); position: absolute; background: #e2e1e1; border: 1px solid #d5d7d7; top: 30px; padding: 6px 0 6px 42px; z-index: 1; } 
+.algebraArea .algebraListArea .algebra-sort-group-switch { min-width: 46px; height: 100%; border-right: 1px solid #d5d7d7; display: flex; align-items: center; justify-content: center; } 
+.algebraArea .algebraListArea .algeo-tab-switch { top: unset; } 
+.algebraArea .algebraListArea .algebra-sort-group-name { width: 100%; height: 100%; display: flex; font-size: 16px; font-weight: 600; color: #505050; position: relative; justify-content: center; align-items: center; } 
+
+.algebraArea .algebra-sort-group .clrSlctMenu { left: 13px; top: 55px; } 
+.algebraArea .algebra-sort-group .nameChangeMenu { left: 96px; top: 55px; } 
+.algebraArea .algebra-sort-group .pntSlctMenu { left: 27px; top: 55px; } 
+.algebraArea .algebra-sort-group .linSlctMenu { left: 22px; top: 55px; } 
+.algebraArea .algebra-sort-group .styleMenu.clrSlctMenu:before,
+.algebraArea .algebra-sort-group .styleMenu.clrSlctMenu:after { left: 35px; } 
+.algebraArea .algebra-sort-group .styleMenu.linSlctMenu:before,
+.algebraArea .algebra-sort-group .styleMenu.linSlctMenu:after { left: 60px; } 
+.algebraArea .algebra-sort-group .linear-style-options { left: 125px; top: 55px; } 
+.algebraArea .algebra-sort-group .linear-style-options.poly-stripe-options,
+.algebraArea .algebra-sort-group .linear-style-options.linear-stripe-options { top: 145px; left: 130px; } 
+.algebraArea .algebra-sort-group .linSlctMenu.poly-pattern, 
+.algebraArea .algebra-sort-group .linSlctMenu.linear-pattern { left: -2px; } 
+.algebraArea .algebra-sort-group .styleMenu.poly-pattern:before,
+.algebraArea .algebra-sort-group .styleMenu.poly-pattern:after,
+.algebraArea .algebra-sort-group .styleMenu.linear-pattern:before,
+.algebraArea .algebra-sort-group .styleMenu.linear-pattern:after { left: 152px; } 
+.algebraArea .algebra-sort-group .styleMenu.poly-stripe-color-menu,
+.algebraArea .algebra-sort-group .styleMenu.linear-stripe-color-menu { left: 168px; top: 147px; } 
+
+.algebraEditor { position: relative; bottom: 0; width: 100%; } 
+#newEdithor[contentEditable=true]:empty:not(:focus):before { content: attr(data-text); font: 600 15px 'NanumSquareB'; color: #ccc; padding: 24px 14px 24px 15px; letter-spacing: 1px; } 
+#newEdithor.mq-math-mode[contentEditable=true]:empty:not(:focus):before { padding: 0; } 
+.algebra,
+.algebraWrap { border: 1px solid #d5d7d7; border-bottom: 0px; border-left: none; border-right: none; display: flex; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; } 
+.algebra.turn-off.btnVisibleItem .panel-l-op { background-color: #ececec; border-right: 1px solid #d5d7d7; } 
+.algebra .panel-l-op,
+.algebraWrap .panel-l-op { width: 49px; background-color: #d5d7d7; } 
+.algebra.btnVisibleItem .panel-l-op,
+.algebraWrap.btnVisibleItem .panel-l-op { min-width: 46px; cursor: pointer; background-color: #ececec; border-right: 1px solid #d5d7d7; display: flex; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; justify-content: center; align-items: center; } 
+.algebra .panel-r-op,
+.algebraWrap .panel-r-op { width: 100%; min-height: 66px; display: flex; font-size: 16px; font-weight: 600; color: #505050; position: relative; } 
+.algebra.selected .panel-l-op .newingAdd { background-position: -472px -357px; } 
+.algebra .panel-l-op .newingAdd { width: 16px; height: 16px; color: #fff; font-size: 18px; margin: 0 auto; background-position: -472px -357px; } 
+.algebra .panel-r-op .algeo-row-name,
+.algebra .panel-r-op .algeo-row-icon { min-width: 26px; max-width: 80px; height: calc(100% - 17px); margin: 0 3px 0 5px; padding: 13px 5px 0 6px; display: inline-block; white-space: nowrap; overflow-x: auto; } 
+.algebra .panel-r-op .algeo-row-icon { height: 40%; border: none; background: none; } 
+.algebra .panel-r-op.algebra-expression .algeo-row-name { margin: 0 0 0 6px; } 
+.algebra .panel-r-op .algeo-row-name-led { position: absolute; top: 0px; left: 4px; } 
+.algebra .panel-r-op .algeo-row-name-led.inactive:after { content: '\f070'; font-family: fontawesome; font-size: 11px; color: #969696; } 
+.algebra .panel-r-op .algeo-row-name-led.active:after { content: '\f06e'; font-family: fontawesome; font-size: 11px; color: #4baeda; } 
+.algebra .panel-r-op .rohw { display: flex; flex-wrap: wrap; flex: 1; align-items: center; padding: 8px 8px 8px 5px; } 
+.algebra .panel-r-op .rohw .mq-root-block { display: block; padding: 4px 0 6px 7px; } 
+.algebra .panel-r-op .rohw .lblcc { border: none; line-height: 1; color: #505050; } 
+.algebra .panel-r-op .rohw .object-edit-input { font: 500 16px 'Libre Baskerville'; color: #2b89b3; outline: none; border: 0; letter-spacing: -0.5px; line-height: 1; padding: 0; } 
+.algebra .panel-r-op .domainRow { display: block; width: 100%; overflow: visible; } 
+.algebra .panel-r-op .algeo-second-field { min-height: 33px; width: 245px; color: #505050; } 
+.algebra .panel-r-op .mq-root-block,
+.algebra .panel-r-op .algeo-second-field { height: 100%; padding: 0 0 0 7px; display: inline-block; overflow: hidden; box-shadow: none; outline: none; border: 0; } 
+.algebra .panel-r-op .algeo-second-field,
+.algebra .panel-r-op .rohw .lblcc,
+.algebra .panel-r-op .algeo-second-span,
+.algebra .panel-r-op .mq-math-mode,
+.algebra .panel-r-op .mq-math-mode .mq-editable-field,
+.algebra .panel-r-op .mq-math-mode var,
+.algebra .panel-r-op .mq-math-mode .mq-text-mode,
+.algebra .panel-r-op .mq-math-mode .mq-nonSymbola { font: 500 16px 'Libre Baskerville'; font-family: 'Libre Baskerville', 'NanumSquareB'; letter-spacing: -0.4px; } 
+.algebra .panel-r-op .mq-math-mode .mq-operator-name { font-family: "Times New Roman", serif; line-height: .9; font-style: normal; } 
+.algebra .panel-r-op .mq-math-mode .mq-supsub { font-size: 70%; } 
+.algebra .panel-r-op .mq-math-mode *,
+.algebra .panel-r-op .mq-math-mode .mq-paren { font-family: "Times New Roman", Symbola; } 
+.algebra .panel-r-op .mq-math-mode .mq-paren { transform-origin: center 0.2em; -moz-transform-origin: center .2em; -ms-transform-origin: center .2em; -o-transform-origin: center .2em; } 
+.algebra .panel-r-op .algeo-second-span { line-height: 1; } 
+.algebra .panel-r-op .algeo-second-icon { width: 43px; height: 33px; margin: 0px 0px; display: inline-block; position: absolute; left: 0px; bottom: 0px; background-color: #ececec; border-top: 1px solid #ccc; border-right: 1px solid #ccc; } 
+.algebra .panel-r-op .algeo-second-icon:after { content: ''; width: 23px; height: 16px; background-position: -389px -356px; position: absolute; left: 11px; bottom: 9px; } 
+.algebra.newing { border: 1px solid #9ddac9; border-left: none; border-right: none; } 
+.algebra.newing .panel-r-op .edithor { width: 284px; } 
+.algebra.newing .panel-r-op .rohw { padding: 0; max-width: 100%; } 
+.algebra.newing .panel-r-op .rohw .mq-root-block { width: 100%; padding: 0 0 0 1px; } 
+.algebra.newing .panel-l-op { background-color: #9ddac9; border-right: 1px solid #9ddac9; } 
+.algebra.newing .edithor.mq-editable-field.mq-math-mode { background: #fff; border: 0; padding: 24px 14px 24px 15px; box-shadow: none; position: relative; min-height: 19px} 
+.algebra.newing .edithor.mq-editable-field.mq-empty:after { visibility: visible; content: '입력'; letter-spacing: 1px; } 
+.algebra.newing .mq-editable-field.mq-empty:after,
+.algebra.newing .mq-editable-field.mq-text-mode:after,
+.algebra.newing .mq-math-mode .mq-empty:after { visibility: visible; content: '입력'; font: 600 15px 'NanumSquareB'; color: #ccc; letter-spacing: 1px; } 
+.algebra.newing .algebra-expression .algeo-row-title,
+.algebra.newing .algebra-expression .domainRow { display: none; } 
+.algebra .algebra-expression .rohw { padding: 0; max-width: 265px; letter-spacing: -0.2px; } 
+.algebra .algebra-expression .rohw .lblcc { width: 224px; box-shadow: none; min-height: 40px; display: flex; align-items: center; } 
+.algebra .algebra-expression .domainRow { border-top: 1px solid #ccc; } 
+.algebra .algebra-expression .algeo-row-name { border: none; border-right: 1px solid #ccc; justify-content: center; } 
+.algebra .algebra-expression .algeo-row-icon { background-color: #ececec; border-top: 1px solid #ccc; border-right: 1px solid #ccc; height: calc(40% - 1px); } 
+.algebra .algebra-expression .algeo-second-field::-ms-input-placeholder { font: 500 13px 'Libre Baskerville'; font-family: 'Libre Baskerville', 'NanumSquareB'; color: #c1c1c1; ; } 
+.algebra .algebra-expression .algeo-second-field::-webkit-input-placeholder { font: 500 13px 'Libre Baskerville'; font-family: 'Libre Baskerville', 'NanumSquareB'; color: #c1c1c1; } 
+.algebra .algebra-expression .algeo-second-field::-moz-placeholder { font: 500 13px 'Libre Baskerville'; font-family: 'Libre Baskerville', 'NanumSquareB'; color: #c1c1c1; } 
+.algebra .onoffOptn,
+.algebraWrap .onoffOptn,
+.algebraSlide .onoffOptn,
+.algebraWrong .onoffOptn,
+.algebraFix .onoffOptn,
+.algebraWhite .onoffOptn,
+.algebraFix .onoffEmojiIcon { width: 30px; height: 30px; background: url(../textures/algeocube_img/Algeoapp_1024.png) no-repeat; display: flex; justify-content: center; align-items: center; } 
+.algebra .onoffIcon,
+.algebraWhite .onoffIcon,
+.algebraSlide .onoffIcon { background-position: -133px -242px; } 
+.algebra .onoffIcon.turn-off,
+.algebraWhite .onoffIcon.turn-off,
+.algebraWrap .onoffIcon.turn-off { background-position: -163px -242px; } 
+.algebra.selected,
+.algebraWrap.selected { border: 1px solid #4e547a; border-left: none; border-right: none; } 
+.algebra.selected.btnVisibleItem .panel-l-op,
+.algebra.newing.selected.btnVisibleItem .panel-l-op,
+.algebraWrap.selected.btnVisibleItem .panel-l-op { background-color: #4e547a; border-right: 1px solid #4e547a; } 
+.algebra.boolValid.btnVisibleItem { display: none; visibility: hidden; } 
+.algebra.selected.btnVisibleItem .panel-l-op.algebraWrong,
+.algebraWrap.selected.btnVisibleItem .panel-l-op.algebraWrong { background-color: #f36868; border-right: 1px solid #f36868; } 
+.algebraArea [tabindex] { outline: none !important; } 
+.algebra.selected .onoffIcon.turn-off,
+.algebraWrap.selected .onoffIcon.turn-off { background-position: -163px -242px; } 
+.algebra.selected+.algebra { border-top: 0px; } 
+.algebraAddArea { height: 34px; cursor: pointer; padding: 0; margin: 0; display: flex; position: fixed; top: 86px; width: 360px; z-index: 2; } 
+.algebraAddArea .algebraAddBtn { position: relative; width: inherit; height: inherit; display: flex; justify-content: center; align-items: center; font: 600 14px 'NanumSquareB'; } 
+.algebraAddArea .scriptAddBtn { border-right: 1px solid #c0c0c0; } 
+.algebraAddArea .algebraAddBtn { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; font: 600 14px 'NanumSquareB'; background: linear-gradient(to top, #e0e0e0 0%, #fefefe 100%); } 
+.algebraAddArea .algebraAddBtn:active { background: linear-gradient(to bottom, #e0e0e0 0%, #fefefe 100%); } 
+.algebraAddArea .algebraAddBtn:hover { color: #006d9e; } 
+.algebraSlide.selected { border: 1px solid #4f547a; border-left: none; border-right: none; } 
+.algebraSlide.selected.btnVisibleItem .panel-l-op { background: #4f547a; } 
+.algebra .panel-r-op .panelWrite { display: none; } 
+.algebra.algebraSlide .algebraSlide .panel-r-op .panelWrite { display: block; position: relative; } 
+.algebraSlide .panel-r-op .panelPlay { background-position: -235px -356px; display: inline-block; width: 13px; height: 15px; margin: 0 0 0 8px; padding: 2px; border: 0; background-color: transparent; cursor: pointer; outline: none; } 
+.algebraSlide .panel-r-op .panelPlay:hover { background-position: -250px -356px; } 
+.algebraSlide .panel-r-op .panelPlay { display: none; visibility: hidden; } 
+/*180627 시연에 앞서 미개발 사항 숨김 */
+/* .algebraSlide .panel-r-op .panelWrite::before { background-position: -235px -356px; content: ''; position: absolute; top: 2px; left: 0; display: inline-block; width: 13px; height: 15px; }  */
+.algebra .panel-r-op .panelSlide { display: none; } 
+.algebra.algebraSlide .panel-r-op .panelSlide { display: block; margin-top: 10px; } 
+.algebraSlide .panel-r-op .panelSlide .lTxt,
+.algebraSlide .panel-r-op .panelSlide .rTxt { display: inline-block; width: 35px; font-size: 14px; text-align: center; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range] { -webkit-appearance: none; border: 1px solid white; width: 150px; vertical-align: middle; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-webkit-slider-runnable-track { width: 166px; height: 6px; background: #ddd; border: none; border-radius: 3px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; border: 1px solid #fff; height: 18px; width: 18px; border-radius: 50%; background: #8f8f8f; margin-top: -6px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:focus { outline: none; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:focus::-webkit-slider-runnable-track { background: #ccc; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-moz-range-track { width: 166px; height: 6px; background: #ddd; border: none; border-radius: 3px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-moz-range-thumb { border: none; height: 16px; width: 16px; border-radius: 50%; background: #8f8f8f; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:-moz-focusring { outline: 1px solid white; outline-offset: -1px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-ms-track { width: 166px; height: 6px; background: transparent; border-color: transparent; border-width: 6px 0; color: transparent; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-ms-fill-lower { background: #777; border-radius: 10px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-ms-fill-upper { background: #ddd; border-radius: 10px; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]::-ms-thumb { border: none; height: 18px; width: 18px; border-radius: 50%; background: #8f8f8f; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:focus::-ms-fill-lower { background: #888; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:focus::-ms-fill-upper { background: #ccc; } 
+.algebraSlide .panel-r-op .panelSlide input[type=range]:before { content: ''; width: 2px; height: 6px; background: #8f8f8f; display: block; position: relative; left: 50%; } 
+.algebra .panel-r-op .object-upper-edit,
+.object-lower-edit { display: none; } 
+.panelClose { background-position: -265px -356px; cursor: pointer; position: absolute; top: 10px; right: 10px; width: 13px; height: 13px; } 
+.panelClose:hover { background-position: -280px -356px; } 
+.panelInput { height: 23px; width: 165px; display: inline-block; border: none; font: 600 16px 'NanumSquareB'; color: inherit; padding: 0 25px 0 17px; outline: none; } 
+.algebraFix .onoffEmojiIcon { width: 14px; height: 18px; background-position: -158px -405px; display: block; } 
+.algebraFix .turn-off .onoffEmojiIcon { background-position: -144px -405px; } 
+.algebraWrong.selected { border: 1px solid #f46869; border-left: none; border-right: none; } 
+.algebraWrong.selected.btnVisibleItem .panel-l-op { background: #f46869; border-right: 1px solid #f46869; } 
+.algebraWrong .onoffIcon { background-position: -194px -243px; } 
+.algebraWrong .panel-r-op .panelWrong { display: block; padding-left: 27px; } 
+.algebraWrong .panel-r-op .panelWrite { display: block; position: relative; margin-top: 10px; padding-left: 27px; } 
+.algebraWrong .panel-r-op .panelWrite .panelInput { height: 22px; border: none; } 
+.algebraWhite.selected { border: 1px solid #bdbdbd; border-left: none; border-right: none; } 
+.algebraWhite.btnVisibleItem .panel-l-op { background: #fff; } 
+.algebraWhite.selected.btnVisibleItem .panel-l-op { background: #fff; border-right: 1px solid #bdbdbd; } 
+.algebraWhite .panel-r-op { padding: 0; } 
+.algebraWhite .panel-r-op dl { margin: 0; padding: 0; } 
+.algebraWhite .panel-r-op dl+dl { border-top: 1px solid #bdbdbd; } 
+.algebraWhite .panel-r-op dl dt { display: table-cell; width: 38px; text-align: center; } 
+.algebraWhite .panel-r-op dl dt.panelIcon { background: #f4f4f4; } 
+.algebraWhite .panel-r-op dl dt.panelIcon::before { background-position: -199px -356px; content: ''; display: inline-block; width: 19px; height: 16px; vertical-align: middle; } 
+.algebraWhite .panel-r-op dl dd { display: table-cell; padding: 10px; border-left: 1px solid #bdbdbd; } 
+.algebrafolder.selected { border: 1px solid #bdbdbd; border-left: none; border-right: none; } 
+.algebrafolder.btnVisibleItem .panel-l-op { padding-top: 26px; background: #fff; align-items: inherit; } 
+.algebrafolder.selected.btnVisibleItem .panel-l-op { background: #fff; border-right: 1px solid #bdbdbd; } 
+.algebrafolder .onoffIcon { position: relative; background-position: -254px -243px; } 
+.algebrafolder .onoffIcon::after { background-position: -219px -356px; transform: rotate(180deg); content: ''; position: absolute; bottom: -12px; left: 7px; display: inline-block; width: 14px; height: 9px; } 
+.algebrafolder.selected .onoffIcon { background-position: -426px -230px; } 
+.algebrafolder.selected .onoffIcon::after { background-position: -219px -356px; transform: rotate(0deg); } 
+.algebrafolder .panel-r-op { padding: 0; } 
+.algebrafolder .panel-r-op dl { margin: 0; padding: 0; } 
+.algebrafolder .panel-r-op dl>dt { position: relative; margin: 0; padding: 20px; border-bottom: 1px solid #bdbdbd; } 
+.algebrafolder .panel-r-op dl>dt .panelStyle { display: block; } 
+.algebrafolder .panel-r-op dl>dt .panelValue { display: block; margin-top: 10px; } 
+.algebrafolder .panel-r-op dl>dd { margin: 0; padding: 0; } 
+.algebrafolder .panel-r-op dl>dd>dl { display: flex; margin: 0; padding: 0; } 
+.algebrafolder .panel-r-op dl>dd>dl+dl { border-top: 1px solid #bdbdbd; } 
+.algebrafolder .panel-r-op dl>dd>dl>dt { display: flex; width: 38px; padding: 0; background: #f5f5f5; border-right: 1px solid #bdbdbd; border-bottom: none; align-items: center; justify-content: center; } 
+.algebrafolder .panel-r-op dl>dd>dl>dt .onoffOptn { background-position: -310px -243px; width: 25px; height: 25px; } 
+.algebrafolder .panel-r-op dl>dd>dl>dt.active .onoffOptn { background-position: -285px -243px; } 
+.algebrafolder .panel-r-op dl>dd>dl>dd { position: relative; width: 100%; padding: 15px; } 
+.algebrafolder .panel-r-op dl>dd>dl>dd .styleType { display: block; } 
+.algebrafolder .panel-r-op dl>dd>dl>dd .styleValue { display: block; margin-top: 10px; font-size: 14px; } 
+
+/* Geometry area */
+.titLabel { margin: 12px 0 10px 0; color: #666; font-size: 15px; font-weight: 600; cursor: default; } 
+.btnOptn { margin: 0 1px; cursor: pointer; display: inline-block; width: 38px; height: 38px; border: 1px solid #aaa; border-radius: 5px; } 
+.btnOptn:hover { border: 3px solid #aaa; width: 34px; height: 34px; } 
+.btnOptn.activeItem { border: 3px solid #0a8fdf; width: 34px; height: 34px; } 
+.btnOptn.activeItem::after { background-position: -335px -365px; } 
+/* Basic tools */
+.basicBtn[data-func=cursor] { background-position: -44px -2px; } 
+.basicBtn[data-func=slctGroup] { background-position: -86px -2px; } 
+.basicBtn[data-func=text] { background-position: -128px -2px; } 
+.basicBtn[data-func=nameTog] { background-position: -170px -2px; } 
+.basicBtn[data-func=objectHide] { background-position: -212px -2px; } 
+.basicBtn[data-func=delete] { background-position: -254px -2px; } 
+.basicBtn[data-func=mazePath] { background-position: -44px -169px; } 
+.basicBtn.activeItem[data-func=cursor] { background-position: -47px -5px; } 
+.basicBtn.activeItem[data-func=slctGroup] { background-position: -89px -5px; } 
+.basicBtn.activeItem[data-func=text] { background-position: -131px -5px; } 
+.basicBtn.activeItem[data-func=nameTog] { background-position: -173px -5px; } 
+.basicBtn.activeItem[data-func=objectHide] { background-position: -215px -5px; } 
+.basicBtn.activeItem[data-func=delete] { background-position: -257px -5px; } 
+.basicBtn.activeItem[data-func=mazePath] { background-position: -47px -172px; } 
+/*Point tools*/
+.pointBtn[data-func=point] { background-position: -296px -2px; } 
+.pointBtn[data-func=meet] { background-position: -338px -2px; } 
+.pointBtn[data-func=onTheObj] { background-position: -380px -2px; } 
+.pointBtn[data-func=cen_point] { background-position: -422px -2px; } 
+.pointBtn[data-func=slider] { background-position: -464px -2px; } 
+.pointBtn[data-func=checkbox] { background-position: -338px -128px; } 
+.pointBtn[data-func=image] { background-position: -170px -2px; } 
+.pointBtn[data-func=table] { background-position: -2px -170px; } 
+.pointBtn.activeItem[data-func=point] { background-position: -299px -5px; } 
+.pointBtn.activeItem[data-func=meet] { background-position: -341px -5px; } 
+.pointBtn.activeItem[data-func=onTheObj] { background-position: -383px -5px; } 
+.pointBtn.activeItem[data-func=cen_point] { background-position: -425px -5px; } 
+.pointBtn.activeItem[data-func=slider] { background-position: -467px -5px; } 
+.pointBtn.activeItem[data-func=checkbox] { background-position: -341px -131px; } 
+.pointBtn.activeItem[data-func=image] { background-position: -173px -5px; } 
+.pointBtn.activeItem[data-func=table] { background-position: -5px -173px; } 
+/*Line tools*/
+.lineBtn[data-func=line] { background-position: -44px -44px; } 
+.lineBtn[data-func=segment_with_given_length] { background-position: -253px -128px; } 
+.lineBtn[data-func=full_line] { background-position: -86px -44px; } 
+.lineBtn[data-func=half_line] { background-position: -128px -44px; } 
+.lineBtn[data-func=parallel] { background-position: -170px -44px; } 
+.lineBtn[data-func=vertical] { background-position: -212px -44px; } 
+.lineBtn[data-func=verticalBisctr] { background-position: -254px -44px; } 
+.lineBtn[data-func=anglrbisctr] { background-position: -296px -44px; } 
+.lineBtn[data-func=tangent] { background-position: -338px -44px; } 
+.lineBtn[data-func=vector] { background-position: -380px -44px; } 
+.lineBtn.activeItem[data-func=line] { background-position: -47px -47px; } 
+.lineBtn.activeItem[data-func=segment_with_given_length] { background-position: -257px -131px; } 
+.lineBtn.activeItem[data-func=full_line] { background-position: -89px -47px; } 
+.lineBtn.activeItem[data-func=half_line] { background-position: -131px -47px; } 
+.lineBtn.activeItem[data-func=parallel] { background-position: -173px -47px; } 
+.lineBtn.activeItem[data-func=vertical] { background-position: -215px -47px; } 
+.lineBtn.activeItem[data-func=verticalBisctr] { background-position: -257px -47px; } 
+.lineBtn.activeItem[data-func=anglrbisctr] { background-position: -299px -47px; } 
+.lineBtn.activeItem[data-func=tangent] { background-position: -341px -47px; } 
+.lineBtn.activeItem[data-func=vector] { background-position: -383px -47px; } 
+/*Circle tools*/
+.circleBtn[data-func=circle] { background-position: -44px -86px; } 
+.circleBtn[data-func=compass] { background-position: -86px -86px; } 
+.circleBtn[data-func=threePoints] { background-position: -128px -86px; } 
+.circleBtn[data-func=r_circle] { background-position: -170px -86px; } 
+.circleBtn[data-func=arc] { background-position: -212px -86px; } 
+.circleBtn[data-func=sectorForm] { background-position: -254px -86px; } 
+.circleBtn.activeItem[data-func=circle] { background-position: -47px -89px; } 
+.circleBtn.activeItem[data-func=compass] { background-position: -89px -89px; } 
+.circleBtn.activeItem[data-func=threePoints] { background-position: -131px -89px; } 
+.circleBtn.activeItem[data-func=r_circle] { background-position: -173px -89px; } 
+.circleBtn.activeItem[data-func=arc] { background-position: -215px -89px; } 
+.circleBtn.activeItem[data-func=sectorForm] { background-position: -257px -89px; } 
+/*Polygon tools*/
+.polygonBtn[data-func=polygon] { background-position: -422px -44px; } 
+.polygonBtn[data-func=reg_polygon2] { background-position: -464px -44px; } 
+.polygonBtn[data-func=reg_polygon] { background-position: -2px -86px; } 
+.polygonBtn[data-func=reg_polygon] { background-position: -2px -86px; } 
+.polygonBtn[data-func=triangle_with_given_angle] { background-position: -295px -128px; } 
+.polygonBtn.activeItem[data-func=polygon] { background-position: -425px -47px; } 
+.polygonBtn.activeItem[data-func=reg_polygon2] { background-position: -467px -47px; } 
+.polygonBtn.activeItem[data-func=reg_polygon] { background-position: -5px -89px; } 
+.polygonBtn.activeItem[data-func=triangle_with_given_angle] { background-position: -298px -131px; } 
+/* Length tools */
+.lengthBtn[data-func=length] { background-position: -296px -86px; } 
+.lengthBtn[data-func=angle] { background-position: -338px -86px; } 
+.lengthBtn[data-func=area] { background-position: -380px -86px; } 
+.lengthBtn[data-func=pointSymmetry] { background-position: -422px -86px; } 
+.lengthBtn[data-func=lineSymmetry] { background-position: -464px -86px; } 
+.lengthBtn[data-func=rotation] { background-position: -2px -128px; } 
+.lengthBtn[data-func=parrallel_translation] { background-position: -380px -128px; } 
+.lengthBtn[data-func=expand_to_point] { background-position: -422px -128px; } 
+.lengthBtn.activeItem[data-func=length] { background-position: -299px -89px; } 
+.lengthBtn.activeItem[data-func=angle] { background-position: -341px -89px; } 
+.lengthBtn.activeItem[data-func=area] { background-position: -383px -89px; } 
+.lengthBtn.activeItem[data-func=pointSymmetry] { background-position: -425px -89px; } 
+.lengthBtn.activeItem[data-func=lineSymmetry] { background-position: -467px -89px; } 
+.lengthBtn.activeItem[data-func=rotation] { background-position: -5px -131px; } 
+.lengthBtn.activeItem[data-func=parrallel_translation] { background-position: -383px -131px; } 
+.lengthBtn.activeItem[data-func=expand_to_point] { background-position: -425px -131px; } 
+/* Beauty tools */
+.beautyBtn[data-func=beauty] { background-position: -44px -128px; } 
+.beautyBtn[data-func=beautyLength] { background-position: -86px -128px; } 
+.beautyBtn[data-func=beautyAngle] { background-position: -128px -128px; } 
+.beautyBtn[data-func=beautyParallel] { background-position: -170px -128px; } 
+.beautyBtn[data-func=pen] { background-position: -212px -128px; } 
+.beautyBtn.activeItem[data-func=beauty] { background-position: -47px -131px; } 
+.beautyBtn.activeItem[data-func=beautyLength] { background-position: -89px -131px; } 
+.beautyBtn.activeItem[data-func=beautyAngle] { background-position: -131px -131px; } 
+.beautyBtn.activeItem[data-func=beautyParallel] { background-position: -173px -131px; } 
+.beautyBtn.activeItem[data-func=pen] { background-position: -215px -131px; } 
+/* Tools Option */
+.optionBtn { margin: 2px 0 0 6px; } 
+.optionBtn[data-func=option] { background-position: -2px -2px; } 
+.optionBtn.activeItem[data-func=option] { background-position: -202px -282px; } 
+/* Tools hover */
+.basicBtn.activeItem[data-func=cursor]:hover,
+.basicBtn.activeItem[data-func=slctGroup]:hover,
+.basicBtn.activeItem[data-func=text]:hover,
+.basicBtn.activeItem[data-func=nameTog]:hover,
+.basicBtn.activeItem[data-func=slider]:hover,
+.basicBtn.activeItem[data-func=checkbox]:hover,
+.basicBtn.activeItem[data-func=share]:hover,
+.basicBtn.activeItem[data-func=delete]:hover,
+.basicBtn.activeItem[data-func=mazePath]:hover,
+.basicBtn.activeItem[data-func=objectHide]:hover,
+.pointBtn.activeItem[data-func=point]:hover,
+.pointBtn.activeItem[data-func=meet]:hover,
+.pointBtn.activeItem[data-func=onTheObj]:hover,
+.pointBtn.activeItem[data-func=cen_point]:hover,
+.pointBtn.activeItem[data-func=slider]:hover,
+.pointBtn.activeItem[data-func=checkbox]:hover,
+.pointBtn.activeItem[data-func=image]:hover,
+.pointBtn.activeItem[data-func=table]:hover,
+.lineBtn.activeItem[data-func=line]:hover,
+.lineBtn.activeItem[data-func=segment_with_given_length]:hover,
+.lineBtn.activeItem[data-func=full_line]:hover,
+.lineBtn.activeItem[data-func=half_line]:hover,
+.lineBtn.activeItem[data-func=parallel]:hover,
+.lineBtn.activeItem[data-func=vertical]:hover,
+.lineBtn.activeItem[data-func=verticalBisctr]:hover,
+.lineBtn.activeItem[data-func=anglrbisctr]:hover,
+.lineBtn.activeItem[data-func=tangent]:hover,
+.lineBtn.activeItem[data-func=vector]:hover,
+.circleBtn.activeItem[data-func=circle]:hover,
+.circleBtn.activeItem[data-func=compass]:hover,
+.circleBtn.activeItem[data-func=threePoints]:hover,
+.circleBtn.activeItem[data-func=r_circle]:hover,
+.circleBtn.activeItem[data-func=arc]:hover,
+.circleBtn.activeItem[data-func=sectorForm]:hover,
+.polygonBtn.activeItem[data-func=polygon]:hover,
+.polygonBtn.activeItem[data-func=reg_polygon2]:hover,
+.polygonBtn.activeItem[data-func=reg_polygon]:hover,
+.polygonBtn.activeItem[data-func=triangle_with_given_angle]:hover,
+.lengthBtn.activeItem[data-func=length]:hover,
+.lengthBtn.activeItem[data-func=angle]:hover,
+.lengthBtn.activeItem[data-func=area]:hover,
+.lengthBtn.activeItem[data-func=pointSymmetry]:hover,
+.lengthBtn.activeItem[data-func=lineSymmetry]:hover,
+.lengthBtn.activeItem[data-func=rotation]:hover,
+.lengthBtn.activeItem[data-func=parrallel_translation]:hover,
+.lengthBtn.activeItem[data-func=expand_to_point]:hover,
+.beautyBtn.activeItem[data-func=beauty]:hover,
+.beautyBtn.activeItem[data-func=beauty]:hover,
+.beautyBtn.activeItem[data-func=beautyLength]:hover,
+.beautyBtn.activeItem[data-func=beautyAngle]:hover,
+.beautyBtn.activeItem[data-func=beautyParallel]:hover,
+.beautyBtn.activeItem[data-func=pen]:hover,
+.optionBtn.activeItem[data-func=option]:hover { border: 3px solid #0a8fdf; width: 34px; height: 34px; } 
+.codeSubItemsBtn,
+.codeSub2ItemsBtn { cursor: pointer; color: #0079c2; position: relative; top: 25px; margin-right: 10px; padding-bottom: 20px; display: inline; visibility: visible; } 
+.codeSubItemsBtn.hidden { display: none; visibility: hidden; } 
+.codeSub2ItemsBtn.hidden { display: none; visibility: hidden; } 
+.codeSubItems.hidden,
+.codeSub2Items.hidden { display: none; visibility: hidden; } 
+.codeSubItems .btnOptn.hidden { display: none; visibility: hidden} 
+.algeo-tool-editor { display: none; position: fixed; top: 50%; left: 50%; margin: -248px 0 0 -264px; background: #fff; border: 1px solid #bdbdbd; border-radius: 5px; z-index: 4; } 
+.algeo-tool-editor .toolTitle { display: flex; width: 100%; height: 40px; background: #f5f5f5; border-bottom: 1px solid #bdbdbd; color: #000; font-size: 17px; font-weight: bold; font-family: 'NanumSquare'; justify-content: center; align-items: center; text-align: center; } 
+.algeo-tool-editor .toolAll { margin: 0; padding: 20px 20px 16px; border-bottom: 1px solid #bdbdbd; } 
+.algeo-tool-editor .toolAll li { list-style: none; margin: 0; padding: 0; } 
+.algeo-tool-editor .toolAll li+li { margin-top: 4px; } 
+.algeo-tool-editor .toolAll li input[type="checkbox"] { display: none; } 
+.algeo-tool-editor .toolAll li input[type="checkbox"]+label { display: inline-block; position: relative; cursor: pointer; font-size: 22px; } 
+.algeo-tool-editor .toolAll li input[type="checkbox"]+label:before { content: ""; width: 18px; height: 18px; border: 1px solid #bdbdbd; border-radius: 5px; display: inline-block; letter-spacing: 0; } 
+.algeo-tool-editor .toolAll li input[type="checkbox"]:checked+label:before { content: '\f14a'; margin-right: 2px; color: #0079c2; letter-spacing: 0; border: none; } 
+.algeo-tool-editor .toolAll .toolGroup dl { margin: 0; padding: 0; display: flex; flex-flow: wrap; justify-content:start; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dt { display: table-cell; margin: 0; padding: 8px 15px 0 0; vertical-align: top; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd { position: relative; display: table-cell; margin: 0; padding: 0 8px 0 0; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd input[type="checkbox"] { display: none; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd input[type="checkbox"]+label { display: inline-flex; position: relative; cursor: pointer; font-size: 18px; height: 42px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd input[type="checkbox"]+label:before { content: ""; position: absolute; top: -6px; right: -4px; width: 14px; height: 14px; background: #fff; border: 1px solid #bdbdbd; border-radius: 5px; display: inline-block; letter-spacing: 0; z-index: 999; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd input[type="checkbox"]:checked+label:before { content: '\f14a'; margin-right: 2px; color: #41acb6; letter-spacing: 0; border: none; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon { display: inline-block; width: 40px; height: 40px; border: 1px solid #aaa; border-radius: 5px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iPoint { background-position: -296px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iMeet { background-position: -338px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iOnTheObj { background-position: -380px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iCen_point { background-position: -422px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iSlider { background-position: -464px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iCheckbox { background-position: -338px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.image { background-position: -170px -2px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.table { background-position: -2px -170px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iLine { background-position: -44px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.segment_with_given_length { background-position: -253px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iFull_line { background-position: -86px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iHalf_line { background-position: -128px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iParallel { background-position: -170px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iVertical { background-position: -212px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iVerticalBisctr { background-position: -254px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iAnglrbisctr { background-position: -296px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iTangent { background-position: -338px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iVector { background-position: -380px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iCircle { background-position: -44px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iCompass { background-position: -86px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iThreePoints { background-position: -128px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iR_circle { background-position: -170px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iArc { background-position: -212px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iSectorForm { background-position: -254px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iPolygon { background-position: -422px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iReg_polygon2 { background-position: -464px -44px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iReg_polygon { background-position: -2px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.triangle_with_given_angle { background-position: -295px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iLength { background-position: -296px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iAngle { background-position: -338px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iArea { background-position: -380px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iPointSymmetry { background-position: -422px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iLineSymmetry { background-position: -464px -86px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iRotation { background-position: -2px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iParrallel_translation { background-position: -380px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iExpand_to_point { background-position: -422px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iBeauty { background-position: -44px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iBeautyLength { background-position: -86px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iBeautyAngle { background-position: -128px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iBeautyParallel { background-position: -170px -128px; } 
+.algeo-tool-editor .toolAll .toolGroup .groupSorting dd .toolIcon.iPen { background-position: -212px -128px; } 
+.algeo-tool-editor .toolControll,
+.algeoModal .toolControll { padding: 14px 0; text-align: center; } 
+.algeo-tool-editor .toolControll .algeo-toolOption-button,
+.algeoModal .toolControll button { height: 30px; cursor: pointer; padding: 2px 30px; background: #fff; border: 1px solid #a0a0a0; border-radius: 5px; color: #000; font-size: 15px; font-weight: 600; } 
+.algeo-tool-editor .toolControll .algeo-toolOption-button+.algeo-toolOption-button,
+.algeoModal .toolControll button+button { margin-left: 6px; width: 125px; } 
+.algeo-tool-editor .toolControll .algeo-toolOption-button.confBtn,
+.algeoModal .toolControll button.confBtn { background: #0079c2; color: #ffffff; border: 1px solid #135f99; width: 125px; } 
+
+/* Block coding area */
+.navigation-contents-li-style.contents-tab-block .blockArea { width: 315px; } 
+#handle { width: 4px; height: 100%; display: block; position: absolute; top: 0; right: -4px; z-index: 0; cursor: ew-resize; background: linear-gradient(to right, #ABABAB, #DEDEDD, #ABABAB); ; } 
+
+/* BlocklyDuino area */
+.arduinoPanel .arduinoArea { height: inherit; } 
+.arduinoPanel .arduinoArea .arduinoTabArea { display: flex; height: 30px; } 
+.arduinoPanel .arduinoArea .arduinoTabUnit { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: linear-gradient(to top, #5c5c5c, #7d7d7d); border-left: 1px solid #5c5c5c; border-bottom: 1px solid #292929; color: #fff; font-size: 13px; cursor: pointer; } 
+.arduinoPanel .arduinoArea .arduinoTabUnit.active { background: #303030; border-left: 1px solid #303030; } 
+.arduinoPanel .arduinoArea .arduinoCtntArea { height: 100%; } 
+.arduinoPanel .arduinoArea .arduinoCtntUnit { width: 100%; height: 100%; display: none; } 
+.arduinoPanel .arduinoArea .arduinoCtntUnit.active { display: block; } 
+
+/* Help Area */
+#contents-wrapper .helpPanel { visibility: hidden; width: calc(100% - 57px); height: initial; position: absolute; overflow: hidden; left: 57px; z-index: 1; color: #fff; background: #3f5059; transition: all 0.4s cubic-bezier(.39, .58, .57, 1) 0.1s; margin-top: -70px; } 
+#contents-wrapper .helpGroup { display: inline-block; flex-wrap: wrap; align-content: center; z-index: -5; padding: 7px 27px 7px 10px; margin-left: 360px; transition: all 0.4s cubic-bezier(0.39, 0.58, 0.57, 1) 0.1s; } 
+#contents-wrapper .helpGroup.transitionUnset { transition: unset; } 
+#contents-wrapper.in .helpPanel { width: 0} 
+#contents-wrapper .helpArea.helpCtnt { font: 500 14px 'NanumSquareB'; opacity: .6; letter-spacing: .3px;} 
+#contents-wrapper .helpArea.helpTit { font: 400 15px 'NanumSquare'; } 
+#contents-wrapper .helpArea.helpHr { padding: 0; width: 8px; height: 11px; display: inline-flex; position: relative; top: 2px; right: 5px; } 
+#contents-wrapper .helpGroup .helpHrIcon { background-position: -365px -356px; width: 8px; height: 12px; } 
+#contents-wrapper .helpArea { padding: 0 11px 0 0; display: inline; } 
+#contents-wrapper .helpClose { height: 0px; } 
+#contents-wrapper .helpOpen { visibility: visible; margin-top: 0px; } 
+.helpArea.helpPin { width: 17px; height: 17px; position: absolute; right: 21px; display: block; padding: 0; margin-top: -9px; cursor: pointer; justify-content: right; top: 50%; } 
+.helpArea.helpPin .helpPinIcon { background-position: -296px -356px; width: 17px; height: 17px; display: block; cursor: pointer; } 
+.helpArea.helpPin.fixed .helpPinIcon { background-position: -316px -356px; } 
+/*Work area control buttons*/
+.controlArea { position: absolute; display: flex; flex-flow: column; transition: all 0.4s cubic-bezier(0.39, 0.58, 0.57, 1) 0.1s; } 
+.graphCtrlBtn { margin-bottom: 30px; width: 34px; height: 34px; border-radius: 5px; cursor: pointer; -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.35); box-shadow: 0 0 3px rgba(0, 0, 0, 0.35); border: 1px solid #bdbdbd; } 
+.controlArea .presentation-off-button { width: 36px; height: 38px; cursor: pointer;} /* 190409 발표용 */
+.controlArea .setBtn { background-position: -171px -170px; margin-bottom: 20px; } 
+.controlArea .plusBtn { background-position: -134px -170px; margin-bottom: 0; border-radius: 5px 5px 0 0; border-bottom: 0; } 
+.controlArea .minusBtn { background-position: -134px -207px; border-radius: 0 0 5px 5px; border-top: 1px solid #bdbdbd; height: 33px; margin-bottom: 20px; box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35); } 
+.controlArea .snapBtn { background-position: -208px -170px; margin: 0; } 
+.controlArea .snapBtn.active { border-color: #8eb5cc; box-shadow: 0px 0px 3px rgb(4, 147, 212); } 
+.controlArea .bluetoothBtn { background-position: -98px -170px; margin: 20px 0 0 0; } 
+.controlArea .bluetoothBtn.active { background-position: -98px -170; border-color: #8eb5cc; box-shadow: 0px 0px 3px rgb(4, 147, 212); } 
+.controlArea .screencapBtn { background-position: -356px -170px; margin: 0; margin-top: 20px; } 
+.controlArea .screencapBtn.active { border-color: #8eb5cc; box-shadow: 0px 0px 3px rgb(4, 147, 212); } 
+.controlArea .returnBtn { background-position: -319px -170px; bottom: 0px; border-radius: 20px } 
+.controlArea .speechBtn { background-position: -308px -208px; bottom: 0px; border-radius: 20px; } 
+.controlArea .speechBtn.active { background-position: -309px -209px; width: 32px; height: 32px; border: 2px solid #e28c8c; border-color: #cc8e8e; box-shadow: 0px 0px 3px rgb(212, 4, 4); } 
+.controlArea .trailBtn.active { display: flex; } 
+.controlArea .trailBtn { bottom: 0px; border-radius: 20px; background: #fff; display: none; justify-content: center; align-items: center; width: 32px; height: 32px; border: 2px solid #8cc7e2; border-color: #8eb5cc; box-shadow: 0px 0px 3px rgb(4, 147, 212); } 
+.controlArea .trailBtn i.trailBtnIcon { background-position: -126px -334px; width: 18px; height: 18px; display: block; } 
+.controlArea .blocklyBtn { border-radius: 20px; background: #fff; display: none; justify-content: center; align-items: center; } 
+.controlArea .stopBtn,
+.controlArea .stepStopBtn { display: none; }
+.controlArea .stepBystepExecuteBtn i.stepBystepExecuteBtnIcon { background-position: -114px -280px; width: 24px; height: 20px; } 
+.controlArea .stopBtn i.stopBtnIcon { background-position: -97px -281px; width: 18px; height: 18px; } 
+.controlArea .executeBtn i.executeBtnIcon { background-position: -78px -278px; width: 16px; height: 24px; } 
+.controlArea .stepStopBtn i.stepStopBtnIcon { background-position: -97px -281px; width: 18px; height: 18px; } 
+.controlArea .stepExecuteBtn i.stepExecuteBtnIcon { background-position: -140px -278px; width: 26px; height: 22px; } 
+.mbDim { position: fixed; z-index: 100; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0, 0, 0, 0.5); display: none; } 
+.controlArea .scrollDfd { overflow: hidden; } 
+.controlArea .mNaviCallBtn { display: block; cursor: pointer; width: 36px; height: 36px; background: rgba(240, 102, 102, 0.8); border: 1px solid #d04f4f; border-radius: 50%; -webkit-transform: rotate(0deg); transform: rotate(0deg); -webkit-transition: all 0.3s; position: relative; transition: all 0.3s; position: relative; z-index: 113; } 
+.controlArea .mNaviCallBtn:before { display: block; content: " "; width: 21px; height: 3px; border-radius: 2px; background: #fff; position: absolute; top: 48%; left: 23%; } 
+.controlArea .mNaviCallBtn:after { display: block; content: " "; width: 3px; height: 21px; border-radius: 2px; background: #fff; position: absolute; top: 23%; left: 48%; } 
+.controlArea .mNaviCallBtn.open { -webkit-transform: rotate(225deg); transform: rotate(225deg); } 
+.controlArea .mNaviCallBtn span { font-size: 0; } 
+.controlArea .mobBtnSet { position: relative; z-index: 111; } 
+.controlArea .mNaviCallBtnList { font-size: 15px; color: #fff; font-weight: bold; line-height: 50px; position: relative; bottom: 0px; padding: 0; right: 0px; visibility: hidden; } 
+.controlArea .mNaviCallBtnList.open { visibility: visible; } 
+.controlArea .mNaviCallBtnList li { position: absolute; right: 0px; bottom: 0px; opacity: 0; transition: bottom 0.3s, opacity 0.3s; z-index: 112; list-style: none; } 
+.controlArea .mNaviCallBtnList.open li { opacity: 1; } 
+.controlArea .mNaviCallBtnList.open .li4 { bottom: 188px; } 
+.controlArea .mNaviCallBtnList.open .li3 { bottom: 144px; } 
+.controlArea .mNaviCallBtnList.open .li2 { bottom: 100px; } 
+.controlArea .mNaviCallBtnList.open .li1 { bottom: 57px; } 
+.controlArea .mNaviCallBtnList a { display: flex; justify-content: center; align-items: center; width: 36px; height: 36px; line-height: 45px; text-align: center; background: #fff; border-radius: 50%; font-size: 18px; } 
+.controlArea .mNaviCallBtnList button { display: block; border: none; padding: 0; width: 50px; height: 50px; line-height: 48px; text-align: center; background: #fff; border-radius: 50%; font-size: 18px; } 
+/* .controlArea .mNaviCallBtnList .app,
+.controlArea .mNaviCallBtnList .doc,
+.controlArea .mNaviCallBtnList .modoom,
+.controlArea .mNaviCallBtnList .home,
+.controlArea .mNaviCallBtnList .filter { border: 1px solid #fff; color: #444; }  */
+.controlArea .mNaviCallBtnList .app { border: 1px solid #fff; color: #0091d4; } 
+.controlArea .mNaviCallBtnList .doc { border: 1px solid #fff; color: #f06666; } 
+.controlArea .mNaviCallBtnList .modoom { border: 1px solid #fff; color: #20bda8; } 
+.controlArea .mNaviCallBtnList .filter { border: 1px solid #fff; color: #606060; } 
+.controlArea .mNaviCallBtnList .home { border: 1px solid #fff; color: #606060; } 
+.controlArea .mNaviCallBtnList .homeIcon:before { content: ""; width: 25px; height: 25px; display: block; background-position: -327px -515px; } 
+.controlArea .mNaviMoveName { position: absolute; right: 50px; width: 91px; text-align: right; bottom: 0; display: flex; height: 37px; justify-content: flex-end; align-items: center; } 
+.controlArea.presentation-off { position: absolute; right: 20px; top: -100px; visibility: hidden; transition: all 0.3s ease-in-out 0.1s; } /* 190409 발표용 */
+.controlArea.presentation-off.active { top: 20px; visibility: visible; } /* 190409 발표용 */
+.controlArea.preferences-top { top: 15px; right: 15px; } 
+.controlArea.preferences-bottom { top: unset; bottom: 0; right: 15px; } 
+.controlArea.preferences-bottom .graphCtrlBtn{ margin: 0 0 10px 0; } 
+.controlArea.mNaviCallArea { right: 15px; display: none; bottom: 40px; } 
+.controlArea.undoBtn { width: 32px; height: 32px; position: absolute; left: 15px; top: 15px; transition: all 0.4s cubic-bezier(0.39, 0.58, 0.57, 1) 0.1s; } 
+.controlArea.undoBtn.transitionUnset { transition: unset; } 
+.graphPanel .algeo-undo-button { width: 32px; height: 32px; background-position: -246px -172px; -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.35); box-shadow: 0 0 7px rgba(0, 0, 0, 0.35); border: 1px solid #bdbdbd; border-radius: 5px; cursor: pointer; } 
+
+.dropdownDiv .dropdown .displayBlock { display: block; } 
+.displayBlock { display: block; } 
+.transitionUnset { transition: unset; } 
+.pointer-events-none { pointer-events: none; } 
+.pointer-events-unset { pointer-events: unset; } 
+.modal-backdrop { z-index: -44; } 
+
+/* 190409 발표용 */
+/* Presentation Mode */
+.presentation #header-wrapper,
+.presentation #container-navigation,
+.presentation .controlArea,
+/* .presentation .undoBtn,
+.presentation .mNaviCallArea,
+.presentation .preferences-bottom,
+.presentation .undoBtn, */
+.presentation .equationEditor-area,
+.presentation .dlgFlexScreenCap,
+.presentation .example-content,
+.presentation .helpPanel,
+.presentation .algeo-tool-editor,
+.presentation .algeo-dim,
+.presentation .preferences-top button,
+.presentation .preferences-top .graphCtrlBtn,
+.presentation .algeo-option-dlg,
+.presentation .algeo-snap-dlg,
+.presentation .algeo-screencap-dlg,
+.presentation #vpScreencap { display: none !important; }
+.presentation #contents-wrapper { width: auto; height: 100%; }
+.presentation canvas{ width: 100%; height: auto; float: none; margin: auto; padding: 0;}
+.presentation .presentation-off { display: flex !important;}
+
+/* Lib */
+.styleArea .styleMenu .jscolor { text-align: center; cursor: pointer; } 
