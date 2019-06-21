@@ -34,7 +34,20 @@ function onTouchCancel(touchEvent) {
 }
 
 function onTouchMove(touchEvent) {
-
+    touchEvent.preventDefault();
+    onDocumentMouseDownSet(getConvertTouchToMouse('mousemove', touchEvent));
+    let event = getConvertTouchToMouse('mousemove', touchEvent);
+    raycaster.setFromCamera(mouse, camera);
+    intersects = raycaster.intersectObjects(objects);
+    if (intersects.length > 0) {
+        if(intersects[0].object.name == "gridPlane") {
+        
+        } else {
+            if(event.isMultiTouch == true) {
+                onDocumentMouseMove(event);
+            }
+        }
+    }
 }
 
 function onTouchEnd(touchEvent) {
@@ -44,6 +57,16 @@ function onTouchEnd(touchEvent) {
 
 function onTouchStart(touchEvent) {
     touchEvent.preventDefault();
+    onDocumentMouseDownSet(getConvertTouchToMouse('mousedown', touchEvent));
+    raycaster.setFromCamera(mouse, camera);
+    intersects = raycaster.intersectObjects(objects);
+    if (intersects.length > 0) {
+        if(intersects[0].object.name == "gridPlane") {
+            rollOverMesh.visible = false;                
+        } else {
+            rollOverMesh.visible = true; 
+        }
+    }
     onDocumentMouseDown(getConvertTouchToMouse('mousedown', touchEvent));
 }
 
@@ -143,9 +166,10 @@ function onDocumentMouseMove(event) {
                 var intersects = raycaster.intersectObjects(objects);
                 for(let i of intersects)
                     if(i.object.name == "voxel") {
-                        if(deleteVoxel(i.object))
+                        if(deleteVoxel(i.object)){
                             rollOverMesh.visible = false;
                             contolVoxelSet.add(i.object);
+                        }
                     }
             }
             break;
@@ -356,33 +380,26 @@ function onDocumentMouseMove(event) {
                 }
             }
             break;
-            case enumUserOperationType.COLOR: {
+            case enumUserOperationType.COLOR:
+            case enumUserOperationType.SHAPE:
+            case enumUserOperationType.TEXTURE:
+            {
+                if(null == modeFunc) break;                
+                let funcData = null;
+                if(userOperationMode == enumUserOperationType.COLOR) {
+                    funcData = colorSelector.value;
+                } else if(userOperationMode == enumUserOperationType.SHAPE) {
+                    funcData = geometryIndex;
+                }else if(userOperationMode == enumUserOperationType.TEXTURE) {
+                    funcData = textureIndex;
+                }
+                if(null == funcData) break;
                 var intersects = raycaster.intersectObjects(objects);
                 for(let i of intersects) {
-                    let data = doManager.changeColor(i.object, colorSelector.value);
+                    let data = modeFunc(i.object, funcData);
                     if(null != data){
                         contolVoxelSet.add(data);
                     }
-                }
-            }
-            break;
-            case enumUserOperationType.SHAPE: {
-                var intersects = raycaster.intersectObjects(objects);
-                for(let i of intersects) {
-                    let data = doManager.changeShape(i.object, geometryIndex);
-                    if(null != data){
-                        contolVoxelSet.add(data);
-                    }                     
-                }
-            }
-            break;
-            case enumUserOperationType.TEXTURE: {
-                var intersects = raycaster.intersectObjects(objects);
-                for(let i of intersects) {
-                    let data = doManager.changeTexture(i.object, textureIndex);
-                    if(null != data){
-                        contolVoxelSet.add(data);
-                    }                     
                 }
             }
             break;
@@ -410,18 +427,18 @@ function onDocumentMouseMove(event) {
 function controlVoxel() {
     raycaster.setFromCamera(mouse, camera);
 
-    if(rollOverMesh.visible){        
+    if(rollOverMesh.visible){
         switch(userOperationMode) {
             case enumUserOperationType.ERASE: {
-                let obj = getVoxel(rollOverMesh.position);
-                if(deleteVoxel(obj)){
+                let voxel = getVoxel(rollOverMesh.position);
+                if(deleteVoxel(voxel)){
                     rollOverMesh.visible = false;
-                    contolVoxelSet.add(obj);
+                    contolVoxelSet.add(voxel);
                 }
             }
             break;
             case enumUserOperationType.BUILD: {
-                var intersects = raycaster.intersectObject(rollOverMesh)
+                var intersects = raycaster.intersectObject(rollOverMesh);
                 if (intersects.length > 0) {
                     intersect = intersects[0];
                     let voxel = createVoxel(intersect.point, intersect.face.normal);
@@ -455,27 +472,21 @@ function controlVoxel() {
                 }
             }
             break;
-            case enumUserOperationType.COLOR: {
-                let obj = getVoxel(rollOverMesh.position);
-                let data = doManager.changeColor(obj, colorSelector.value);
-                if(null != data){
-                    contolVoxelSet.add(data);
-                }
-            }
-            break;
-            case enumUserOperationType.SHAPE: {
-                let obj = getVoxel(rollOverMesh.position);
-                let data = doManager.changeShape(obj, geometryIndex);
-                if(null != data){
-                    contolVoxelSet.add(data);
-                }
-            }
-            break;
+            case enumUserOperationType.COLOR:
+            case enumUserOperationType.SHAPE:
             case enumUserOperationType.TEXTURE: {
                 let obj = getVoxel(rollOverMesh.position);
-                let data = doManager.changeTexture(obj, textureIndex);
-                if(null != data){
-                    contolVoxelSet.add(data);
+                if(null != obj) {
+                    let data = null;
+                    if(userOperationMode == enumUserOperationType.COLOR)
+                        data = modeFunc(obj, colorSelector.value);
+                    else if(userOperationMode == enumUserOperationType.SHAPE)
+                        data = modeFunc(obj, geometryIndex);
+                    else if(userOperationMode == enumUserOperationType.TEXTURE)
+                        data = modeFunc(obj, textureIndex);
+                    if(null != data){
+                        contolVoxelSet.add(data);
+                    }
                 }
             }
             break;
@@ -530,46 +541,45 @@ function controlVoxel() {
                 }
             }
             break;
-            case enumUserOperationType.COLOR: {
-                let data = doManager.changeColor(intersect.object, colorSelector.value);
-                if(null != data){
-                    contolVoxelSet.add(data);
-                }
-            }
-            case enumUserOperationType.SHAPE: {    
-                let data = doManager.changeShape(intersect.object, geometryIndex);
+            case enumUserOperationType.COLOR:
+            case enumUserOperationType.SHAPE:
+            case enumUserOperationType.TEXTURE:
+            {
+                let data = null;
+                if(userOperationMode == enumUserOperationType.COLOR)
+                    data = modeFunc(intersect.object, colorSelector.value);
+                else if(userOperationMode == enumUserOperationType.SHAPE)
+                    data = modeFunc(intersect.object, geometryIndex);
+                else if(userOperationMode == enumUserOperationType.TEXTURE)
+                    data = modeFunc(intersect.object, textureIndex);
                 if(null != data){
                     contolVoxelSet.add(data);
                 }
             }
             break;
-            case enumUserOperationType.TEXTURE: { 
-                let data = doManager.changeTexture(intersect.object, textureIndex);
-                if(null != data){
-                    contolVoxelSet.add(data);
-                }
-            }
-            break;
+
         }       
+    }
+}
+
+function onDocumentMouseDownSet(event) {
+    if (algeoDevMode) {
+        canvasMaginLeft = document.getElementById('container-navigation').offsetWidth;
+        canvasWidth = document.getElementById('container-graph').offsetWidth;
+        mouse.set(((event.clientX - canvasMaginLeft) / canvasWidth) * 2 - 1, -((event.clientY - canvasMaginTop) / canvasHeight) * 2 + 1);
+    } else {
+        mouse.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
     }
 }
 
 function onDocumentMouseDown(event) {
     event.preventDefault();
     if(event.isMultiTouch == true) {
-        window.prompt();
         return;
     }
     if (event.which == 1) {
         isLeftMouseDown = true;
-        
-        if(algeoDevMode) {
-            canvasMaginLeft = document.getElementById('container-navigation').offsetWidth;
-            canvasWidth = document.getElementById('container-graph').offsetWidth;
-            mouse.set(((event.clientX - canvasMaginLeft) / canvasWidth) * 2 - 1, -((event.clientY - canvasMaginTop) / canvasHeight) * 2 + 1);
-        } else {
-            mouse.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
-        }
+        onDocumentMouseDownSet(event);
         controlVoxel();
         render();
     }
@@ -592,12 +602,21 @@ function onDocumentMouseUp(event) {
         doManager.pushDoData(undoData);
         contolVoxelSet.clear();
     }
+    if(null != mission){
+        if(mission.process(objects.slice(1, objects.length)) == enumMissionStatus.SUCCESS){
+            mission = null;
+        } else if(mission.process(objects.slice(1, objects.length)) == enumMissionStatus.FAIL){
+            mission = null;
+        }
+    }
 
     createdVoxelsTemp = null;
     selectedVoxelPosition = null;
     algeoCubeSound.onMouseUp(event);
     
 }
+
+var mission = null;
 function onDocumentKeyDown(event) {
     switch (event.keyCode) {
         case 16: // SHIFT
@@ -614,6 +633,15 @@ function onDocumentKeyDown(event) {
             break;
         case 79: // O
             onClickToOriginButton();
+            break;
+        case 81: // Q
+            mission = new Mission();
+            mission.setGoal(objects);            
+            mission.setTimeLimit(10);
+            doManager.init();
+            deleteAllVoxels();
+            mission.missionStart();
+            render();
             break;
         case 82: // R
             onClickReplayButton();
