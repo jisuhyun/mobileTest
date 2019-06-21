@@ -556,6 +556,9 @@ function controlVoxel() {
 
 function onDocumentMouseDown(event) {
     event.preventDefault();
+    if(event.isMultiTouch == true) {
+        return;
+    }
     if (event.which == 1) {
         isLeftMouseDown = true;
         
