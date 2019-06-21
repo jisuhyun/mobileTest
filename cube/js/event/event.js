@@ -21,7 +21,7 @@ function initEvent() {
 
     document.addEventListener('touchstart', onTouchStart, {passive: false});
     document.addEventListener('touchend', onTouchEnd, {passive: false});
-    document.addEventListener('touchmove', onTouchMove, {passive: false});
+    renderer.domElement.addEventListener('touchmove', touchMove, {passive: false});
     document.addEventListener('touchcancel', onTouchCancel, {passive: false});
 
     window.addEventListener('resize', onWindowResize, false);
@@ -33,21 +33,23 @@ function onTouchCancel(touchEvent) {
 
 }
 
-function onTouchMove(touchEvent) {
-    touchEvent.preventDefault();
-    onDocumentMouseDownSet(getConvertTouchToMouse('mousemove', touchEvent));
-    let event = getConvertTouchToMouse('mousemove', touchEvent);
-    raycaster.setFromCamera(mouse, camera);
-    intersects = raycaster.intersectObjects(objects);
-    if (intersects.length > 0) {
-        if(intersects[0].object.name == "gridPlane") {
+function touchMove(touchEvent) {
+    
+    // onDocumentMouseDownSet(getConvertTouchToMouse('mousemove', touchEvent));
+    // let event = getConvertTouchToMouse('mousemove', touchEvent);
+    // raycaster.setFromCamera(mouse, camera);
+    // intersects = raycaster.intersectObjects(objects);
+    // if (intersects.length > 0) {
+    //     if(intersects[0].object.name == "gridPlane") {
         
-        } else {
-            if(event.isMultiTouch == true) {
-                onDocumentMouseMove(event);
-            }
-        }
-    }
+    //     } else {
+    //         if(event.isMultiTouch == true) {
+    //             onDocumentMouseMove(event);
+    //         }
+    //     }
+    // }
+    touchEvent.preventDefault();
+    onDocumentMouseMove(event);
 }
 
 function onTouchEnd(touchEvent) {
