@@ -74,8 +74,9 @@ function getConvertTouchToVector2(x, y) {
 
 function getConvertTouchToMouse(mouseEventType, touchEvent) {
     let pos = getTouchPosition(touchEvent);
-    let mouseEvent = new MouseEvent({
-        mouseEventType,
+    let mouseEvent = new MouseEvent( // create event
+        mouseEventType, // type of event
+        {
             'view': touchEvent.target.ownerDocument.defaultView,
             'bubbles': true,
             'cancelable': true,
