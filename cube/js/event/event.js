@@ -21,7 +21,7 @@ function initEvent() {
 
     document.addEventListener('touchstart', onTouchStart, {passive: false});
     document.addEventListener('touchend', onTouchEnd, {passive: false});
-    document.addEventListener('touchmove', touchMove, false);
+    //document.addEventListener('touchmove', touchMove, false);
     document.addEventListener('touchcancel', onTouchCancel, {passive: false});
 
     window.addEventListener('resize', onWindowResize, false);
@@ -36,22 +36,22 @@ function onTouchCancel(touchEvent) {
 
 
 function touchMove( touchEvent ) {
-    touchEvent.preventDefault();
+    // touchEvent.preventDefault();
 
-    if(touchEvent.changedTouches.length == 1) {
-        let event = getConvertTouchToMouse('mousemove', touchEvent);
-        raycaster.setFromCamera(mouse, camera);
-        intersects = raycaster.intersectObjects(objects);
-        if(intersects[0] == null) {            
-            //if(intersects[0].object.name == "GridPlane")
-            //controls.touchMove(touchEvent);
-        } else {
-            onDocumentMouseMove(event);
-        }
-    } else {
-        createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
-        render();
-    }
+    // if(touchEvent.changedTouches.length == 1) {
+    //     let event = getConvertTouchToMouse('mousemove', touchEvent);
+    //     raycaster.setFromCamera(mouse, camera);
+    //     intersects = raycaster.intersectObjects(objects);
+    //     if(intersects[0] == null) {            
+    //         //if(intersects[0].object.name == "GridPlane")
+    //         //controls.touchMove(touchEvent);
+    //     } else {
+    //         onDocumentMouseMove(event);
+    //     }
+    // } else {
+    //     createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
+    //     render();
+    // }
 }
 
 function onTouchEnd(touchEvent) {

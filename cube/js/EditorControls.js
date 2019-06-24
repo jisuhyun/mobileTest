@@ -215,7 +215,7 @@ THREE.EditorControls = function ( object, domElement ) {
 		domElement.removeEventListener( 'dblclick', onMouseUp, false );
 
 		domElement.removeEventListener( 'touchstart', touchStart, false );
-		//domElement.removeEventListener( 'touchmove', touchMove, false );
+		domElement.removeEventListener( 'touchmove', touchMoveExtention, false );
 
 	};
 
@@ -254,12 +254,31 @@ THREE.EditorControls = function ( object, domElement ) {
 
 	}
 
+	function touchMoveExtention(event) {
+		event.preventDefault();
+
+		if (event.changedTouches.length == 1) {
+			let eventTouch = getConvertTouchToMouse('mousemove', event);
+			raycaster.setFromCamera(mouse, camera);
+			intersects = raycaster.intersectObjects(objects);
+			if (intersects[0] == null) {
+				//if(intersects[0].object.name == "GridPlane")
+				//controls.touchMove(touchEvent);
+			} else {
+				onDocumentMouseMove(eventTouch);
+			}
+		} else {
+			createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
+			render();
+			touchMove(event);
+		}
+	}
 
 	function touchMove( event ) {
 
 		if ( scope.enabled === false ) return;
 
-		event.preventDefault();
+		//event.preventDefault();
 		event.stopPropagation();
 
 		function getClosest( touch, touches ) {
@@ -310,7 +329,7 @@ THREE.EditorControls = function ( object, domElement ) {
 	}
 
 	domElement.addEventListener( 'touchstart', touchStart, false );
-	//domElement.addEventListener( 'touchmove', touchMove, false );
+	domElement.addEventListener( 'touchmove', touchMoveExtention, false );
 
 };
 
