@@ -68,14 +68,14 @@ algeoBlock.tb += '              </value>';
 algeoBlock.tb += '              <field name="state">zoomIn</field>';
 algeoBlock.tb += '            </block>';
 
-algeoBlock.tb += '            <block type="look_location">';
-algeoBlock.tb += '              <field name="state">turnRight</field>';
-algeoBlock.tb += '              <value name="value">';
-algeoBlock.tb += '                  <block type="basic_input_value">';
-algeoBlock.tb += '                      <field name="value">10</field>';
-algeoBlock.tb += '                  </block>';
-algeoBlock.tb += '              </value>';
-algeoBlock.tb += '            </block>';
+// algeoBlock.tb += '            <block type="look_location">';
+// algeoBlock.tb += '              <field name="state">turnRight</field>';
+// algeoBlock.tb += '              <value name="value">';
+// algeoBlock.tb += '                  <block type="basic_input_value">';
+// algeoBlock.tb += '                      <field name="value">10</field>';
+// algeoBlock.tb += '                  </block>';
+// algeoBlock.tb += '              </value>';
+// algeoBlock.tb += '            </block>';
 
 algeoBlock.tb += '            <block type="basic_input_value">';
 algeoBlock.tb += '                <field name="value">0</field>';

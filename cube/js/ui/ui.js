@@ -9,12 +9,21 @@ function initUI() {
     colorSelector.value = 'FFFFFF';
 
     let textureDivTag = document.getElementById('textures');
+    let textureCount = 0;
     for(let i=0; i< resTextures.length; ++i) {
         let img = new Image(50, 50);
         img.src = resTextures[i];
         textureDivTag.append(img);
-        img.addEventListener("click", onClickTextureButton.bind(this, i), false)        
+        img.addEventListener("click", onClickTextureButton.bind(this, textureCount++), false)        
     }
+
+    for(let i=0; i< resNumberTextures.length; ++i) {
+        let img = new Image(50, 50);
+        img.src = resNumberTextures[i];
+        textureDivTag.append(img);
+        img.addEventListener("click", onClickTextureButton.bind(this, textureCount++), false)        
+    }
+
     toOriginButton = document.getElementById('toOrigin');
     toOriginButton.addEventListener("click", onClickToOriginButton.bind(toOriginButton), false);
 
@@ -39,27 +48,33 @@ function selectShape(shape) {
     geometryIndex = shape;
 }
 
+var modeFunc= null;
 function onClickUserOperationModeButton() {
     switch(userOperationMode) {
         case enumUserOperationType.BUILD:
             userOperationMode = enumUserOperationType.COLOR;
             userOperationModeButton.value = "Color Mode";
+            modeFunc = doManager.changeColor;
             break;
         case enumUserOperationType.COLOR:
             userOperationMode = enumUserOperationType.ERASE;
             userOperationModeButton.value = "Erase Mode";
+            modeFunc = null;
             break;
         case enumUserOperationType.ERASE:
             userOperationMode = enumUserOperationType.SHAPE;
             userOperationModeButton.value = "Shape Mode";
+            modeFunc = doManager.changeShape;
             break;
         case enumUserOperationType.SHAPE:
             userOperationMode = enumUserOperationType.TEXTURE;
             userOperationModeButton.value = "Texture Mode";
+            modeFunc = doManager.changeTexture;            
             break;
         case enumUserOperationType.TEXTURE:
             userOperationMode = enumUserOperationType.BUILD;
             userOperationModeButton.value = "Build Mode";
+            modeFunc = null;
             break;
         // default:
         //     ++mode;

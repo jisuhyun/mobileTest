@@ -3,7 +3,7 @@ function getVoxelCenterVector_fromBlock(x, y, z) {
     vec.x = x;
     vec.y = y;
     vec.z = z;
-    let ori = new THREE.Vector3(vec.x * 50, vec.y * 50, vec.z * 50);
+    let ori = new THREE.Vector3(vec.x * voxelSize, vec.y * voxelSize, vec.z * voxelSize);
     let convert = getVoxelCenterVector(ori);
     return convert;
 }

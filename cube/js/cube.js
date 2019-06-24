@@ -3,6 +3,7 @@ if (WEBGL.isWebGLAvailable() === false) {
 }
 
 var camera, scene, renderer;
+var gridPlane;
 
 var enumRollOverMeshIndex = {
     CENTER: 0,
@@ -34,7 +35,7 @@ var VoxelMap = new Map();
 var algeoCubeSound = null;
 
 var cameraDefalutPosition = new THREE.Vector3(500, 800, 500);
-var originPosition = new THREE.Vector3();
+
 var controls;
 var orbitControls;
 
@@ -163,28 +164,21 @@ function init() {
     rollOverMesh.visible = false;
     rollOverMeshs[0] = rollOverMesh;
 
-
     // grid
-
-    let gridCount = 6;
-    let gridSize = gridCount * voxelSize;
-
-    // let girdSize = 300;
-    // let divisions = girdSize * 0.02;
-
     var gridHelper = new THREE.GridHelper(gridSize, gridCount, "blue", "black");
     scene.add(gridHelper);    
+    gridHelper.position.copy(originPosition);
 
     var geometry = new THREE.PlaneBufferGeometry(gridSize, gridSize);
     geometry.rotateX(-Math.PI / 2);
 
-    let plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
+    gridPlane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
         visible: false
-    }));    
-    plane.name = "gridPlane";
-    scene.add(plane);
+    }));
+    gridPlane.name = objectNames[enumObjectNames.GRIDPLANE];
+    scene.add(gridPlane);
 
-    objects.push(plane);
+    objects.push(gridPlane);
 
     //emtpyObj
     let emptyGeometry = new THREE.BoxGeometry(4, 4, 4);
@@ -196,7 +190,9 @@ function init() {
     emptyObjectForCamera.position = new THREE.Vector3(0, 0, 0);
 
     scene.add(emptyObjectForCamera);
-    emptyObjectForCamera.add(camera);
+    // if(camera.parent == null) {
+    //     emptyObjectForCamera.add(camera);
+    // }
 
     // lights
 
@@ -236,7 +232,7 @@ function createVoxel(point, normal, playSound = true) {
     var voxel = new THREE.Mesh(geometrys[geometryIndex], cubeMaterial);
     voxel.geometryIndex = geometryIndex;
     voxel.position.copy(point)
-    voxel.name = "voxel"
+    voxel.name = objectNames[enumObjectNames.CUBE]
     addVoxel(voxel);
     if (playSound) algeoCubeSound.createObject(algeoCubeSound.eCreateObject.OBJ_CUBE);
     return voxel;
@@ -294,6 +290,7 @@ function getVoxel_fromBlock(x, y, z) {
 }
 
 function deleteVoxel(voxel, playSound = true) {
+    if(voxel.name != objectNames[enumObjectNames.CUBE]) return null;
     let key = getVector3KeyString(voxel.position);
     let obj = VoxelMap.get(key);
     if (null != obj) {
@@ -309,8 +306,8 @@ function deleteVoxel(voxel, playSound = true) {
 function deleteVoxels(voxels) {
     let returnVoxels = [];
     let voxel;
-    for (let v of voxels) {
-        voxel = deleteVoxel(v, false);
+    for (let i=voxels.length -1; i>= 0; --i) {
+        voxel = deleteVoxel(voxels[i], false);
         if (voxel != null)
             returnVoxels.push(voxel);
     }
@@ -321,15 +318,34 @@ function deleteVoxels(voxels) {
     else null;
 }
 
+function deleteAllVoxels(playSound = false) {    
+    for (let i=objects.length -1; i>= 0; --i) {
+        // if(objects[i].name == objectNames[enumObjectNames.CUBE]){
+            deleteVoxel(objects[i], false);            
+        // }
+    }
+    if(playSound)
+        algeoCubeSound.deleteObject(algeoCubeSound.eDeleteObject.DELETE_CUBE);
+}
+
 function render() {
     if(isLookUpdateCamera == false) {
-        renderer.render(scene, camera);    
+        renderer.render(scene, camera);
     }
 }
 
-function getVoxelCenterVector(v) {
-    return v.divideScalar(voxelSize).floor().multiplyScalar(voxelSize).addScalar(voxelSizeHalf);
+if(gridIsOdd){
+    function getVoxelCenterVector(v) {
+        let vv = v.divideScalar(voxelSize).round().multiplyScalar(voxelSize).clone();        
+        return vv;
+    }
 }
+else {
+    function getVoxelCenterVector(v) {
+        return v.divideScalar(voxelSize).floor().multiplyScalar(voxelSize).addScalar(voxelSizeHalf);
+    }
+}
+
 
 function setCameraDefalutSetting() {
     camera.position.copy(cameraDefalutPosition);
@@ -349,6 +365,8 @@ function save() {
     project = {};
     project.camera = camera.toJSON();
     project.scene = scene.toJSON();
+    project.gridCount = gridCount;
+    
     return project;
 }
 
@@ -357,27 +375,25 @@ function load(project){
     var loader = new THREE.ObjectLoader();
     camera.copy(loader.parse( project.camera ))
     scene = loader.parse( project.scene );
-
     objects = [];
     VoxelMap.clear();
-    let gridPlane;
     for(let o of scene.children) {
         if(o.name.includes("rollOverMesh_")) {
             rollOverMeshs[parseInt(o.name[o.name.length-1])] = o;
         } else if(o.name.includes("rollOverMesh")){
             rollOverMeshs[0] = o;
             rollOverMesh = o;
-        } else if(o.name == "gridPlane"){
+        } else if(o.name == objectNames[enumObjectNames.GRIDPLANE]){
             gridPlane = o;
             gridPlane.geometry.rotateX(-Math.PI / 2);
-        } else if(o.name == "voxel"){
+        } else if(o.name == objectNames[enumObjectNames.CUBE]){
             VoxelMap.set(getVector3KeyString(o.position), o);   
             objects.push(o);
         }
     }
-
     objects.unshift(gridPlane);
     doManager.init();
+    initDatas(project.gridCount)
     render();
 }
 
@@ -444,6 +460,9 @@ function cameraViewFront() {
 }
 
 function cameraRotation(value) {
+    if(camera.parent == null) {
+        emptyObjectForCamera.add(camera);
+    }
     isLookUpdateCamera = true;
     camRotationSpeed = value * 0.001;
 }
@@ -451,6 +470,7 @@ function cameraRotation(value) {
 function cameraRotationUpdate() {
     let speed = Date.now() * camRotationSpeed;
     emptyObjectForCamera.rotation.set(0, speed, 0);
+    console.log(speed);
     renderer.render(scene, camera); 
 }
 

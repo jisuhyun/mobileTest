@@ -47,7 +47,7 @@ DoManager.prototype.undo = function(){
         case enumUserOperationType.BUILD:
             deleteVoxels(doData.doList);
             this.redoList.push(doData);
-        break;       
+        break;
         case enumUserOperationType.ERASE:
             for(let voxel of doData.doList)
                 addVoxel(voxel);
@@ -71,9 +71,8 @@ DoManager.prototype.redo = function(){
     }
     switch(doData.type) {
         case enumUserOperationType.BUILD:
-            for(let voxel of doData.doList){
+            for(let voxel of doData.doList)
                 addVoxel(voxel);
-            }
             this.doList.push(doData);
         break;       
         case enumUserOperationType.ERASE:
@@ -89,7 +88,6 @@ DoManager.prototype.redo = function(){
     }
     render();
     return true;
-
 }
 
 DoManager.prototype.do_ = function(doData, listDesc){
@@ -121,7 +119,7 @@ DoManager.prototype.do_ = function(doData, listDesc){
 
 
 DoManager.prototype.changeColor = function(voxel_, newColor){
-    if(voxel_.name == "voxel") {
+    if(voxel_.name == objectNames[enumObjectNames.CUBE]) {
         if(voxel_.material.color.getHexString() != newColor) {
             let data = {
                 voxel: voxel_
@@ -135,7 +133,7 @@ DoManager.prototype.changeColor = function(voxel_, newColor){
 }
 
 DoManager.prototype.changeShape = function(voxel_, newGeometryIndex){
-    if(voxel_.name == "voxel") {
+    if(voxel_.name == objectNames[enumObjectNames.CUBE]) {
         if(voxel_.geometry.name != geometrys[newGeometryIndex].name) {
             let data = {
                 voxel: voxel_
@@ -149,7 +147,7 @@ DoManager.prototype.changeShape = function(voxel_, newGeometryIndex){
 }
 
 DoManager.prototype.changeTexture = function(voxel_, newTextureIndex){
-    if(voxel_.name == "voxel") {
+    if(voxel_.name == objectNames[enumObjectNames.CUBE]) {
         if(voxel_.material.map.name != textures[newTextureIndex].name) {
             let data = {
                 voxel: voxel_

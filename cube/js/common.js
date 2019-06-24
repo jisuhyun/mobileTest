@@ -14,6 +14,10 @@ function getImageResourcePath () {
     return getLocalPath() + 'textures/algeocube_img/';
 }
 
+function getNumberTexturesResourcePath () {
+    return getLocalPath() + 'textures/numbers/';
+}
+
 function getSoundResourcePath () {
     return getLocalPath() + 'resource/sound/';
 }
