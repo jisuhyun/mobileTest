@@ -33,27 +33,6 @@ function onTouchCancel(touchEvent) {
 
 }
 
-
-
-function touchMove( touchEvent ) {
-    // touchEvent.preventDefault();
-
-    // if(touchEvent.changedTouches.length == 1) {
-    //     let event = getConvertTouchToMouse('mousemove', touchEvent);
-    //     raycaster.setFromCamera(mouse, camera);
-    //     intersects = raycaster.intersectObjects(objects);
-    //     if(intersects[0] == null) {            
-    //         //if(intersects[0].object.name == "GridPlane")
-    //         //controls.touchMove(touchEvent);
-    //     } else {
-    //         onDocumentMouseMove(event);
-    //     }
-    // } else {
-    //     createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
-    //     render();
-    // }
-}
-
 function onTouchEnd(touchEvent) {
     touchEvent.preventDefault();
     onDocumentMouseUp(getConvertTouchToMouse('mouseup', touchEvent));

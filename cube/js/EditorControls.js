@@ -248,7 +248,8 @@ THREE.EditorControls = function ( object, domElement ) {
 				break;
 
 		}
-
+		let eventTouch = getConvertTouchToMouse('mousedown', event);
+		pointerOld.set( eventTouch.clientX, eventTouch.clientY );
 		prevTouches[ 0 ].copy( touches[ 0 ] );
 		prevTouches[ 1 ].copy( touches[ 1 ] );
 
@@ -262,14 +263,13 @@ THREE.EditorControls = function ( object, domElement ) {
 			raycaster.setFromCamera(mouse, camera);
 			intersects = raycaster.intersectObjects(objects);
 			if (intersects[0] == null) {
-				//if(intersects[0].object.name == "GridPlane")
-				//controls.touchMove(touchEvent);
+				state = STATE.ROTATE;
+				
+				onMouseMove(eventTouch);
 			} else {
 				onDocumentMouseMove(eventTouch);
 			}
 		} else {
-			createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
-			render();
 			touchMove(event);
 		}
 	}
