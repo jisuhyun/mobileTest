@@ -35,8 +35,6 @@ function onTouchCancel(touchEvent) {
 
 
 
-var touches = [ new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3() ];
-var prevTouches = [ new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3() ];
 function touchMove( touchEvent ) {
 
     if ( controls.enabled === false ) return;
@@ -55,85 +53,9 @@ function touchMove( touchEvent ) {
             onDocumentMouseMove(event);
         }
     } else {
-        function getClosest( touch, touches ) {
-
-            var closest = touches[ 0 ];
-    
-            for ( var i in touches ) {
-    
-                if ( closest.distanceTo( touch ) > touches[ i ].distanceTo( touch ) ) closest = touches[ i ];
-    
-            }
-    
-            return closest;
-    
-        }
-    
-        switch ( touchEvent.touches.length ) {
-    
-            case 1:
-                touches[ 0 ].set( touchEvent.touches[ 0 ].pageX, touchEvent.touches[ 0 ].pageY, 0 ).divideScalar( window.devicePixelRatio );
-                touches[ 1 ].set( touchEvent.touches[ 0 ].pageX, touchEvent.touches[ 0 ].pageY, 0 ).divideScalar( window.devicePixelRatio );
-                // scope.rotate( touches[ 0 ].sub( getClosest( touches[ 0 ], prevTouches ) ).multiplyScalar( -1 ) );
-                controls.rotate( touches[ 0 ].sub( getClosest( touches[ 0 ], prevTouches ) ).multiplyScalar( -2 ) );
-                break;
-    
-            case 2:
-                touches[ 0 ].set( touchEvent.touches[ 0 ].pageX, touchEvent.touches[ 0 ].pageY, 0 ).divideScalar( window.devicePixelRatio );
-                touches[ 1 ].set( touchEvent.touches[ 1 ].pageX, touchEvent.touches[ 1 ].pageY, 0 ).divideScalar( window.devicePixelRatio );
-                var distance = touches[ 0 ].distanceTo( touches[ 1 ] );
-                controls.zoom( delta.set( 0, 0, prevDistance - distance ) );
-                prevDistance = distance;
-    
-    
-                var offset0 = touches[ 0 ].clone().sub( getClosest( touches[ 0 ], prevTouches ) );
-                var offset1 = touches[ 1 ].clone().sub( getClosest( touches[ 1 ], prevTouches ) );
-                offset0.x = - offset0.x;
-                offset1.x = - offset1.x;
-    
-                controls.pan( offset0.add( offset1 ) );
-    
-                break;
-    
-        }
-    
-        prevTouches[ 0 ].copy( touches[ 0 ] );
-        prevTouches[ 1 ].copy( touches[ 1 ] );
+        createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
     }
 }
-
-// function touchMove(touchEvent) {
-//     touchEvent.preventDefault();
-
-//     if(touchEvent.changedTouches.length == 1) {
-//         let event = getConvertTouchToMouse('mousemove', touchEvent);
-//         raycaster.setFromCamera(mouse, camera);
-//         intersects = raycaster.intersectObjects(objects);
-//         if(intersects[0] == null) {
-//             //if(intersects[0].object.name == "GridPlane")
-//             //controls.touchMove(touchEvent);
-//         } else {
-//             onDocumentMouseMove(event);
-//         }
-//     } else {
-        
-//     }
-    
-//     // onDocumentMouseDownSet(getConvertTouchToMouse('mousemove', touchEvent));
-//     // let event = getConvertTouchToMouse('mousemove', touchEvent);
-//     // raycaster.setFromCamera(mouse, camera);
-//     // intersects = raycaster.intersectObjects(objects);
-//     // if (intersects.length > 0) {
-//     //     if(intersects[0].object.name == "gridPlane") {
-        
-//     //     } else {
-//     //         if(event.isMultiTouch == true) {
-//     //             onDocumentMouseMove(event);
-//     //         }
-//     //     }
-//     // }
-    
-// }
 
 function onTouchEnd(touchEvent) {
     touchEvent.preventDefault();
