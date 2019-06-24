@@ -35,12 +35,13 @@ function onTouchCancel(touchEvent) {
 
 function onTouchEnd(touchEvent) {
     touchEvent.preventDefault();
+    rollOverMesh.visible = false;
     onDocumentMouseUp(getConvertTouchToMouse('mouseup', touchEvent));
 }
 
 function onTouchStart(touchEvent) {
     touchEvent.preventDefault();
-    rollOverMesh.visible = false; 
+    //rollOverMesh.visible = false; 
     onDocumentMouseDown(getConvertTouchToMouse('mousedown', touchEvent));
 }
 

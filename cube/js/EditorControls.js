@@ -261,14 +261,21 @@ THREE.EditorControls = function ( object, domElement ) {
 		if (event.changedTouches.length == 1) {
 			let eventTouch = getConvertTouchToMouse('mousemove', event);
 			raycaster.setFromCamera(mouse, camera);
-			intersects = raycaster.intersectObjects(objects);
-			if (intersects[0] == null) {
+			intersects = raycaster.intersectObjects(rollOverMeshs);
+			if(intersects.length == 0) {
 				state = STATE.ROTATE;
-				
 				onMouseMove(eventTouch);
 			} else {
 				onDocumentMouseMove(eventTouch);
 			}
+			// for (let i = 0; i < intersects.length; ++i) {
+			// 	if (intersects[i] == null) {
+			// 		state = STATE.ROTATE;
+			// 		onMouseMove(eventTouch);
+			// 	} else if(intersects[i].object.name == 'Cube' || intersects[i].object.name == 'GridPlane') {
+			// 		onDocumentMouseMove(eventTouch);
+			// 	}
+			// }
 		} else {
 			touchMove(event);
 		}
