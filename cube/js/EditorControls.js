@@ -215,7 +215,7 @@ THREE.EditorControls = function ( object, domElement ) {
 		domElement.removeEventListener( 'dblclick', onMouseUp, false );
 
 		domElement.removeEventListener( 'touchstart', touchStart, false );
-		domElement.removeEventListener( 'touchmove', touchMove, false );
+		//domElement.removeEventListener( 'touchmove', touchMove, false );
 
 	};
 
@@ -310,7 +310,7 @@ THREE.EditorControls = function ( object, domElement ) {
 	}
 
 	domElement.addEventListener( 'touchstart', touchStart, false );
-	domElement.addEventListener( 'touchmove', touchMove, false );
+	//domElement.addEventListener( 'touchmove', touchMove, false );
 
 };
 
