@@ -34,6 +34,13 @@ function onTouchCancel(touchEvent) {
 }
 
 function touchMove(touchEvent) {
+    touchEvent.preventDefault();
+
+    if(touchEvent.changedTouches.length == 1) {
+        onDocumentMouseMove(event);
+    } else {
+        controls.touchMove(touchEvent);
+    }
     
     // onDocumentMouseDownSet(getConvertTouchToMouse('mousemove', touchEvent));
     // let event = getConvertTouchToMouse('mousemove', touchEvent);
@@ -48,8 +55,7 @@ function touchMove(touchEvent) {
     //         }
     //     }
     // }
-    touchEvent.preventDefault();
-    onDocumentMouseMove(event);
+    
 }
 
 function onTouchEnd(touchEvent) {
@@ -59,16 +65,7 @@ function onTouchEnd(touchEvent) {
 
 function onTouchStart(touchEvent) {
     touchEvent.preventDefault();
-    onDocumentMouseDownSet(getConvertTouchToMouse('mousedown', touchEvent));
-    raycaster.setFromCamera(mouse, camera);
-    intersects = raycaster.intersectObjects(objects);
-    if (intersects.length > 0) {
-        if(intersects[0].object.name == "gridPlane") {
-            rollOverMesh.visible = false;                
-        } else {
-            rollOverMesh.visible = true; 
-        }
-    }
+    rollOverMesh.visible = false; 
     onDocumentMouseDown(getConvertTouchToMouse('mousedown', touchEvent));
 }
 
@@ -167,7 +164,7 @@ function onDocumentMouseMove(event) {
             case enumUserOperationType.ERASE: {
                 var intersects = raycaster.intersectObjects(objects);
                 for(let i of intersects)
-                    if(i.object.name == "voxel") {
+                    if(i.object.name == objectNames[enumObjectNames.CUBE]) {
                         if(deleteVoxel(i.object)){
                             rollOverMesh.visible = false;
                             contolVoxelSet.add(i.object);
@@ -411,8 +408,8 @@ function onDocumentMouseMove(event) {
         var intersects = raycaster.intersectObjects(objects);
         if (intersects.length > 0) {
             var intersect = intersects[0];
-            if(intersects[0].object.name == "gridPlane") {
-                rollOverMesh.visible = false;                
+            if(intersects[0].object.name == objectNames[enumObjectNames.GRIDPLANE]) {
+                rollOverMesh.visible = false;
             }
             else {
                 rollOverMesh.visible = true;
@@ -448,7 +445,7 @@ function controlVoxel() {
                         xAxisCreate = false;
                         yAxisCreate = false;
                         zAxisCreate = false;
-                        if(intersect.object.name == "voxel" || intersect.object.name == "rollOverMesh") {
+                        if(intersect.object.name == objectNames[enumObjectNames.CUBE] || intersect.object.name == "rollOverMesh") {
                             if(intersect.object.position.x != voxel.position.x){
                                 xAxisCreate = true;
                             } else if(intersect.object.position.y != voxel.position.y){
@@ -502,7 +499,7 @@ function controlVoxel() {
 
         switch(userOperationMode) {
             case enumUserOperationType.ERASE: {
-                if (intersect.object.name == "voxel") {
+                if (intersect.object.name == objectNames[enumObjectNames.CUBE]) {
                     if(deleteVoxel(intersect.object)) {
                         rollOverMesh.visible = false;
                         contolVoxelSet.add(intersect.object);
@@ -516,7 +513,7 @@ function controlVoxel() {
                     xAxisCreate = false;
                     yAxisCreate = false;
                     zAxisCreate = false;
-                    if(intersect.object.name == "voxel" || intersect.object.name == "rollOverMesh") {
+                    if(intersect.object.name == objectNames[enumObjectNames.CUBE] || intersect.object.name == "rollOverMesh") {
                         if(intersect.object.position.x != voxel.position.x){
                             xAxisCreate = true;
                         } else if(intersect.object.position.y != voxel.position.y){
@@ -636,20 +633,21 @@ function onDocumentKeyDown(event) {
         case 79: // O
             onClickToOriginButton();
             break;
-        case 81: // Q
-            mission = new Mission();
-            mission.setGoal(objects);            
+        case 81: // Q       
+            mission = new MissionMakeTheSame();            
+            mission.setGoal(objects);
             mission.setTimeLimit(10);
-            doManager.init();
-            deleteAllVoxels();
-            mission.missionStart();
-            render();
+            mission.missionStart();            
             break;
         case 82: // R
             onClickReplayButton();
             break;
         case 83: // S
             saveData = save();
+            break;
+        case 87: // W
+            mission = new MissionSdoku();            
+            mission.missionStart();            
             break;
         case 89: // Y
             if(event.ctrlKey)
