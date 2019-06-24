@@ -21,7 +21,7 @@ function initEvent() {
 
     document.addEventListener('touchstart', onTouchStart, {passive: false});
     document.addEventListener('touchend', onTouchEnd, {passive: false});
-    renderer.domElement.addEventListener('touchmove', touchMove, false);
+    document.addEventListener('touchmove', touchMove, false);
     document.addEventListener('touchcancel', onTouchCancel, {passive: false});
 
     window.addEventListener('resize', onWindowResize, false);
@@ -36,17 +36,13 @@ function onTouchCancel(touchEvent) {
 
 
 function touchMove( touchEvent ) {
-
-    if ( controls.enabled === false ) return;
-
     touchEvent.preventDefault();
-    touchEvent.stopPropagation();
 
     if(touchEvent.changedTouches.length == 1) {
         let event = getConvertTouchToMouse('mousemove', touchEvent);
         raycaster.setFromCamera(mouse, camera);
         intersects = raycaster.intersectObjects(objects);
-        if(intersects[0] == null) {
+        if(intersects[0] == null) {            
             //if(intersects[0].object.name == "GridPlane")
             //controls.touchMove(touchEvent);
         } else {
@@ -54,6 +50,7 @@ function touchMove( touchEvent ) {
         }
     } else {
         createVoxel(getVoxelCenterVector_fromBlock(0, 0, 0));
+        render();
     }
 }
 
